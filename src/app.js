@@ -22,6 +22,11 @@ const userRoutes= require('./routes/patient');
 const Patient= require('./models/patient');
 
 mongoose.connect('mongodb://127.0.0.1/Rural-healthcare');
+// mongo.then(() => {
+// console.log('connected');
+// }).catch((err) => {
+// console.log('err', err);
+// });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -56,8 +61,12 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+//this is passport initialization for medicalstores
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(MedicalStore.authenticate()));  
+passport.serializeUser(MedicalStore.serializeUser());
+passport.deserializeUser(MedicalStore.deserializeUser());
 
 passport.use(new LocalStrategy(Patient.authenticate()));  
 
