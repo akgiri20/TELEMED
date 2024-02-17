@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const StoreSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
     time: {
          type: String,
          required: true
