@@ -6,9 +6,9 @@ const flash=require('connect-flash');
 const passport=require('passport');
 
 
-router.get('/medicalstoreregister', async (req, res) => {
-    res.render('medicalstore/login')
-})
+router.get("/medicalstoreregister", async (req, res) => {
+  res.render("medicalstore/login");
+});
 
 router.post('/medicalstoreregister', catchAsync(async (req, res, next) => {
     try {

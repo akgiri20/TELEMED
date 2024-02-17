@@ -9,7 +9,7 @@ const catchAsync = require('../utilities/catchAsync');
 //const { isValidUser, isLoggedIn } = require('../middleware');
 
 router.get('/patient_register', (req, res) => {
-    res.render('users/login');
+    res.render("patient/login");
 });
 
 router.post('/patient_register', async (req, res, next) => {
@@ -29,7 +29,7 @@ router.post('/patient_register', async (req, res, next) => {
 });
 
 router.get('/patient_login', (req, res) => {
-    res.render('users/login');
+    res.render('patient/login');
 });
 
 router.post('/patient_login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/' }), 
@@ -41,9 +41,10 @@ router.post('/patient_login', passport.authenticate('local', { failureFlash: tru
 }
 );
 
-router.get('/patient_home' ,async(req,res) => {
-    res.render('users/patient_home');
+router.get('/home' ,async(req,res) => {
+    res.render('home');
 });
+
 
 
 module.exports = router;
