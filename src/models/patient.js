@@ -16,5 +16,4 @@ const PatientSchema = new Schema({
     }
  })
 
- PatientSchema.plugin(passportLocalMongoose); 
  module.exports = mongoose.model('Patient', PatientSchema);
