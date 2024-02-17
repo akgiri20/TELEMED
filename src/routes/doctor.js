@@ -7,7 +7,7 @@ const passport=require('passport');
 
 
 router.get('/doctorregister', async (req, res) => {
-    res.render('doctor/register')
+    res.render('doctor/login')
 })
 
 router.post('/doctorregister', catchAsync(async (req, res, next) => {

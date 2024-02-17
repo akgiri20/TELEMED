@@ -11,10 +11,10 @@ const medicalStoreRoutes=require('./routes/medicalStore');
 const doctorRoutes=require('./routes/doctor');
 const passport=require('passport');
 const LocalStrategy=require('passport-local');
-const router=express.Router();
-mongoose.set('useNewUrlParser', true)
-mongoose.set('useFindAndModify', true)
-mongoose.set('useCreateIndex', true)
+// const router=express.Router();
+// mongoose.set('useNewUrlParser', true)
+// mongoose.set('useFindAndModify', true)
+// mongoose.set('useCreateIndex', true)
 
 mongoose.connect('mongodb://127.0.0.1/Rural-healthcare');
 // mongo.then(() => {
