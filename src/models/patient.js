@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const PatientSchema = new Schema({
     age: {
@@ -16,4 +17,5 @@ const PatientSchema = new Schema({
     }
  })
 
+ PatientSchema.plugin(passportLocalMongoose); 
  module.exports = mongoose.model('Patient', PatientSchema);

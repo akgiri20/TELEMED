@@ -8,6 +8,7 @@ const methodOverride = require('method-override');
 const Doctor=require('./models/doctor');
 const MedicalStore=require('./models/medicalStore');
 const medicalStoreRoutes=require('./routes/medicalStore');
+const doctorRoutes=require('./routes/doctor');
 const passport=require('passport');
 const LocalStrategy=require('passport-local');
 const router=express.Router();
@@ -53,13 +54,19 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+//this is passport initialization for medicalstores
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.use(new LocalStrategy(MedicalStore.authenticate()));  
-
 passport.serializeUser(MedicalStore.serializeUser());
 passport.deserializeUser(MedicalStore.deserializeUser());
+
+//this is passport initialization for doctors
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(Doctor.authenticate()));  
+passport.serializeUser(Doctor.serializeUser());
+passport.deserializeUser(Doctor.deserializeUser());
 
 
 app.use((req, res, next) => {
@@ -72,6 +79,7 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/',medicalStoreRoutes);
+app.use('/',doctorRoutes);
 
 app.get('/', (req, res) => {
     res.render('home')
