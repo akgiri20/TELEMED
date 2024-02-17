@@ -1,6 +1,7 @@
 const { required } = require('joi');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const doctorSchema = new Schema({
     specialization:{
@@ -11,12 +12,13 @@ const doctorSchema = new Schema({
         type:String,
         default:null
     },
-    contactnumber:{
+    phone:{
         type:Number,
         default:null
     }
 });
 
+doctorSchema.plugin(passportLocalMongoose); 
 module.exports=mongoose.model('Doctor',doctorSchema);
 
 
