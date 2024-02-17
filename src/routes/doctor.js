@@ -2,6 +2,7 @@ const express=require('express');
 const router=express.Router();
 const catchAsync =require('../utils/catchAsync');
 const Doctor=require('../models/doctor');
+const Specialist= require('../models/Specialist');
 const flash=require('connect-flash');
 const passport=require('passport');
 
@@ -20,11 +21,29 @@ router.post('/doctorregister', catchAsync(async (req, res, next) => {
             if (err) return next(err);
             req.flash('success', 'MESS!!');
             console.log(req.body)
-            res.redirect('/');
+            //res.redirect('/');
             
         })
 
-    } catch (e) {
+        try {
+            const specialists = await Specialist.find().lean(); // Get all specialists
+            
+            // Iterate through each specialist
+            for (const specialist of specialists) {
+                const matchingDoctors = await Doctor.find({ specialization: specialist.name }).select('_id').lean(); // Find doctors with matching specialization
+                const doctorIds = matchingDoctors.map(doctor => doctor._id); // Extract doctor IDs
+                
+                // Update specialist document with matching doctor IDs
+                await Specialist.findByIdAndUpdate(specialist._id, { $addToSet: { doctor: { $each: doctorIds } } });
+            }
+            
+            console.log('Specialists updated successfully');
+        } catch (error) {
+            console.error('Error updating specialists:', error);
+        }
+
+    } 
+    catch (e) {
         req.flash('error', e.message);
         res.redirect('/doctorregister');
     }

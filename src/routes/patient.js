@@ -12,7 +12,7 @@ router.get('/patient_register', (req, res) => {
     res.render('users/register');
 });
 
-router.post('/patient_register', async (req, res, next) => {
+router.post('/patient_register', async(req, res, next) => {
     try {
         const { age, username, address, phone, password } = req.body;
         const user = new Patient({ age, username, address, phone});

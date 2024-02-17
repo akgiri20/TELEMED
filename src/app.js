@@ -17,16 +17,14 @@ const { date } = require('joi');
 const passport= require('passport');
 const LocalStrategy= require('passport-local');
 
-const userRoutes= require('./routes/patient');
+
 
 const Patient= require('./models/patient');
+const MedicalStore= require('./models/medicalStore');
+const Doctor= require('./models/doctor');
 
 mongoose.connect('mongodb://127.0.0.1/Rural-healthcare');
-// mongo.then(() => {
-// console.log('connected');
-// }).catch((err) => {
-// console.log('err', err);
-// });
+
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -34,9 +32,12 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
+const userRoutes= require('./routes/patient');
+const doctorRoutes= require('./routes/doctor');
+const specialistRoutes=require('./routes/specialist');
+const medicalRoutes= require('./routes/medicalStore');
 
 app.engine('ejs', ejsMate);
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -69,9 +70,12 @@ passport.serializeUser(MedicalStore.serializeUser());
 passport.deserializeUser(MedicalStore.deserializeUser());
 
 passport.use(new LocalStrategy(Patient.authenticate()));  
-
 passport.serializeUser(Patient.serializeUser());
 passport.deserializeUser(Patient.deserializeUser());
+
+passport.use(new LocalStrategy(Doctor.authenticate()));  
+passport.serializeUser(Doctor.serializeUser());
+passport.deserializeUser(Doctor.deserializeUser());
 
 
 
@@ -86,6 +90,9 @@ app.use((req, res, next) => {
 })
 
 app.use('/', userRoutes);
+app.use('/', medicalRoutes);
+app.use('/', doctorRoutes);
+app.use('/specialist', specialistRoutes);
 
 app.listen(3000, () => {
     console.log('Serving on port 3000')
