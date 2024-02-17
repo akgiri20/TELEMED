@@ -9,7 +9,7 @@ const catchAsync = require('../utilities/catchAsync');
 //const { isValidUser, isLoggedIn } = require('../middleware');
 
 router.get('/patient_register', (req, res) => {
-    res.render('users/register');
+    res.render('users/login');
 });
 
 router.post('/patient_register', async (req, res, next) => {
