@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Disease=require('./disease');
+const Medicines=require('./medicine');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const StoreSchema = new Schema({

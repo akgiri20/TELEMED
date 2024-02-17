@@ -5,7 +5,9 @@ const ejsMate= require('ejs-mate');
 const joi= require('joi');
 const catchAsync= require('./utilities/catchAsync');
 const bodyParser = require("body-parser");
-
+const MedicalStore=require('./models/medicalStore')
+const Doctor=require('./models/doctor')
+const Patient= require('./models/patient');
 
 const ExpressError= require('./utilities/ExpressError');
 const methodOverride= require('method-override');
@@ -18,8 +20,10 @@ const passport= require('passport');
 const LocalStrategy= require('passport-local');
 
 const userRoutes= require('./routes/patient');
+const addmedicineRoutes=require('./routes/addmedicine')
+const doctorRoutes=require('./routes/doctor');
+const medicalStoreRoutes=require('./routes/medicalStore');
 
-const Patient= require('./models/patient');
 
 mongoose.connect('mongodb://127.0.0.1/Rural-healthcare');
 // mongo.then(() => {
@@ -73,6 +77,11 @@ passport.use(new LocalStrategy(Patient.authenticate()));
 passport.serializeUser(Patient.serializeUser());
 passport.deserializeUser(Patient.deserializeUser());
 
+passport.use(new LocalStrategy(Doctor.authenticate()));  
+
+passport.serializeUser(Doctor.serializeUser());
+passport.deserializeUser(Doctor.deserializeUser());
+
 
 
 
@@ -86,6 +95,9 @@ app.use((req, res, next) => {
 })
 
 app.use('/', userRoutes);
+app.use('/',addmedicineRoutes);
+app.use('/',doctorRoutes);
+app.use('/',medicalStoreRoutes);
 
 app.listen(3000, () => {
     console.log('Serving on port 3000')

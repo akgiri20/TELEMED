@@ -1,22 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Doctor = require('./doctor');
+const MedicalStore=require('./medicalStore')
 
-const SpecialistSchema = new Schema({
+const MedicineSchema = new Schema({
     name: {
         type: String,
         required: true
     },
-    detail: {
+    fordisease: {
         type: String,
         required: true
     },
-    doctor: [
+    medicalstores: [
         {
         type: Schema.Types.ObjectId,
-        ref: 'Doctor'
+        ref: 'MedicalStore'
         }
     ]
- })
+})
 
- module.exports = mongoose.model('Specialist', SpecialistSchema);
+module.exports = mongoose.model('Medicine',MedicineSchema);

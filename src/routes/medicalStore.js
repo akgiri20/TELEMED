@@ -20,7 +20,7 @@ router.post('/medicalstoreregister', catchAsync(async (req, res, next) => {
             if (err) return next(err);
             req.flash('success', 'MESS!!');
             console.log(req.body)
-            res.redirect('/');
+            res.redirect('/addmedicine');
             
         })
 
@@ -37,7 +37,7 @@ router.get('/medicalstorelogin',async(req,res)=>{
 router.post('/medicalstorelogin',passport.authenticate('local',{failureFlash:true,failureRedirect:'/medicalstorelogin'}),(req,res)=>{
 
     req.flash('success','welcome back!! you are successfully logged in');
-const redirectUrl = req.session.returnTo || '/';
+const redirectUrl = req.session.returnTo || '/addmedicine';
 delete req.session.returnTo;
 res.redirect(redirectUrl);
 })
@@ -48,5 +48,7 @@ router.get('/logout', (req, res) => {
     req.flash('success', "Goodbye!");
     res.redirect('/');
 })
+
+
 
 module.exports=router;
