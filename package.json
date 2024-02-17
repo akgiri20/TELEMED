@@ -1,7 +1,6 @@
 {
   "name": "55_techarmy",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,5 +17,6 @@
   "homepage": "https://github.com/akgiri20/55_techArmy#readme",
   "dependencies": {
     "gsap": "^3.12.5"
-  }
+  },
+  "description": ""
 }
