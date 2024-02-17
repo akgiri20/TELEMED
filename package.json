@@ -16,7 +16,11 @@
   },
   "homepage": "https://github.com/akgiri20/55_techArmy#readme",
   "dependencies": {
-    "gsap": "^3.12.5"
+    "gsap": "^3.12.5",
+    "three": "^0.161.0"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "vite": "^5.1.3"
+  }
 }
