@@ -1,13 +1,25 @@
 const express = require('express');
-const path = require('path');
-const mongoose = require('mongoose');
-const ejsMate = require('ejs-mate');
-const session=require('express-session');
-const flash=require('connect-flash');
-const methodOverride = require('method-override');
-const Doctor=require('doctor/models');
+const app= express();
+const path= require('path');
+const ejsMate= require('ejs-mate');
+const joi= require('joi');
+const catchAsync= require('./utilities/catchAsync');
+const bodyParser = require("body-parser");
 
-const router=express.Router();
+
+const ExpressError= require('./utilities/ExpressError');
+const methodOverride= require('method-override');
+const mongoose= require('mongoose');
+const flash= require('connect-flash');
+
+const session= require('express-session');
+const { date } = require('joi');
+const passport= require('passport');
+const LocalStrategy= require('passport-local');
+
+const userRoutes= require('./routes/patient');
+
+const Patient= require('./models/patient');
 
 mongoose.connect('mongodb://127.0.0.1/Rural-healthcare');
 
@@ -17,16 +29,18 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
-const app = express();
 
+app.engine('ejs', ejsMate);
 
-app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'views'));
 
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 const sessionConfig = {
     secret: 'thisshouldbeabettersecret!',
@@ -45,10 +59,13 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(User.authenticate()));  
+passport.use(new LocalStrategy(Patient.authenticate()));  
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(Patient.serializeUser());
+passport.deserializeUser(Patient.deserializeUser());
+
+
+
 
 
 app.use((req, res, next) => {
@@ -58,6 +75,8 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error');
     next();
 })
+
+app.use('/', userRoutes);
 
 app.listen(3000, () => {
     console.log('Serving on port 3000')
