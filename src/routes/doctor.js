@@ -7,7 +7,7 @@ const passport=require('passport');
 
 
 router.get('/doctorregister', async (req, res) => {
-    res.render('doctor/login')
+    res.render('doctor/register')
 })
 
 router.post('/doctorregister', catchAsync(async (req, res, next) => {
@@ -20,7 +20,7 @@ router.post('/doctorregister', catchAsync(async (req, res, next) => {
             if (err) return next(err);
             req.flash('success', 'MESS!!');
             console.log(req.body)
-            res.redirect('/');
+            res.redirect('/home');
             
         })
 
@@ -37,7 +37,7 @@ router.get('/doctorlogin',async(req,res)=>{
 router.post('/doctorlogin',passport.authenticate('local',{failureFlash:true,failureRedirect:'/doctorlogin'}),(req,res)=>{
 
     req.flash('success','welcome back!! you are successfully logged in');
-const redirectUrl = req.session.returnTo || '/';
+const redirectUrl = req.session.returnTo || '/home';
 delete req.session.returnTo;
 res.redirect(redirectUrl);
 })
@@ -46,7 +46,7 @@ res.redirect(redirectUrl);
 router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success', "Goodbye!");
-    res.redirect('/');
+    res.redirect('/home');
 })
 
 module.exports=router;

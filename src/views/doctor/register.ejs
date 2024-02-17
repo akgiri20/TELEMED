@@ -2,41 +2,45 @@
 <html>
 
 <head>
-  <title>Log in Page</title>
+  <title>Register Page</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
   <div class="login-page">
-
     <div class="form">
-      <h2>LOG IN HERE</h2>
-      <form action="/doctorlogin" method="POST" class="validated-form">
-
-
-
+      <h2>Patient REGISTER HERE</h2>
+      <form action="/doctorregister" method="POST" class="validated-form">
         <div class="mb-3">
-          <label class="form-label" for="username">Username</label>
-          <input class="form-control" type="text" id="username" name="username" required autofocus>
-
+          <label class="form-label" for="name">Username</label>
+          <input class="form-control" type="text" id="name" name="username" required autofocus>
         </div>
 
 
+        <div class="mb-3">
+          <label class="form-label" for="specialization">Specialization</label>
+          <input class="form-control" type="text" id="specialization" name="specialization" required autofocus>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="educationlevel">Educationlevel</label>
+          <input class="form-control" type="text" id="educationlevel" name="educationlevel" required autofocus>
+        </div>
+
+        
+        <div class="mb-3">
+          <label class="form-label" for="phone">Phone</label>
+          <input class="form-control" type="number" id="phone" name="phone" required autofocus>
+        </div>
         <div class="mb-3">
           <label class="form-label" for="password">Password</label>
           <input class="form-control" type="password" id="password" name="password" required>
         </div>
-
-        <button class="btn btn-success btn-block">LOG IN</button>
+        <button class="btn btn-success btn-block">Register</button>
       </form>
-
-
     </div>
   </div>
 </body>
-
-</html>
-
 
 <style>
   body {
@@ -54,18 +58,6 @@
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
   }
 
-  .avatar {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .avatar img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-  }
-
   .form {
     position: relative;
     z-index: 1;
@@ -79,7 +71,7 @@
 
   .form input[type="text"],
   .form input[type="password"],
-  .form input [type="email"] {
+  .form input[type="number"] {
     font-family: 'Roboto', sans-serif;
     outline: none;
     width: 100%;
@@ -135,3 +127,5 @@
     text-decoration: underline;
   }
 </style>
+
+</html>
