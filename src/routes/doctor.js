@@ -5,7 +5,6 @@ const Doctor=require('../models/doctor');
 const flash=require('connect-flash');
 const passport=require('passport');
 
-
 router.get('/doctorregister', async (req, res) => {
     res.render('doctor/login')
 })
@@ -50,3 +49,4 @@ router.get('/logout', (req, res) => {
 })
 
 module.exports=router;
+

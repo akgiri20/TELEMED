@@ -72,8 +72,6 @@ passport.deserializeUser(Patient.deserializeUser());
 
 
 
-
-
 app.use((req, res, next) => {
     console.log(req.session)
     res.locals.currentUser = req.user;

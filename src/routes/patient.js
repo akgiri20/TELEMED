@@ -41,9 +41,11 @@ router.post('/patient_login', passport.authenticate('local', { failureFlash: tru
 }
 );
 
-router.get('/patient_home' ,async(req,res) => {
-    res.render('users/patient_home');
+router.get('/home' ,async(req,res) => {
+    res.render('home');
 });
+
+
 
 
 module.exports = router;
