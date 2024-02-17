@@ -4,17 +4,21 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const doctorSchema = new Schema({
+    
     specialization:{
         type:String,
-        default:null
+        default:null,
+        required: true
     },
     educationlevel:{
         type:String,
-        default:null
+        default:null,
+        required: true
     },
     phone:{
         type:Number,
-        default:null
+        default:null,
+        required: true
     }
 });
 
