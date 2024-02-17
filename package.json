@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/akgiri20/55_techArmy/issues"
   },
-  "homepage": "https://github.com/akgiri20/55_techArmy#readme"
+  "homepage": "https://github.com/akgiri20/55_techArmy#readme",
+  "dependencies": {
+    "gsap": "^3.12.5"
+  }
 }
