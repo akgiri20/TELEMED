@@ -5,11 +5,23 @@ const ejsMate = require('ejs-mate');
 const session=require('express-session');
 const flash=require('connect-flash');
 const methodOverride = require('method-override');
-const Doctor=require('doctor/models');
-
+const Doctor=require('./models/doctor');
+const MedicalStore=require('./models/medicalStore');
+const medicalStoreRoutes=require('./routes/medicalStore');
+const doctorRoutes=require('./routes/doctor');
+const passport=require('passport');
+const LocalStrategy=require('passport-local');
 const router=express.Router();
+mongoose.set('useNewUrlParser', true)
+mongoose.set('useFindAndModify', true)
+mongoose.set('useCreateIndex', true)
 
 mongoose.connect('mongodb://127.0.0.1/Rural-healthcare');
+// mongo.then(() => {
+// console.log('connected');
+// }).catch((err) => {
+// console.log('err', err);
+// });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -42,13 +54,19 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+//this is passport initialization for medicalstores
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(MedicalStore.authenticate()));  
+passport.serializeUser(MedicalStore.serializeUser());
+passport.deserializeUser(MedicalStore.deserializeUser());
 
-passport.use(new LocalStrategy(User.authenticate()));  
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+//this is passport initialization for doctors
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(Doctor.authenticate()));  
+passport.serializeUser(Doctor.serializeUser());
+passport.deserializeUser(Doctor.deserializeUser());
 
 
 app.use((req, res, next) => {
@@ -58,6 +76,14 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error');
     next();
 })
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use('/',medicalStoreRoutes);
+app.use('/',doctorRoutes);
+
+app.get('/', (req, res) => {
+    res.render('home')
+});
 
 app.listen(3000, () => {
     console.log('Serving on port 3000')

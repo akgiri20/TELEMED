@@ -9,5 +9,4 @@ const SpecialistSchema = new Schema({
     }
  })
 
- SpecialistSchema.plugin(passportLocalMongoose); 
  module.exports = mongoose.model('Specialist', SpecialistSchema);
