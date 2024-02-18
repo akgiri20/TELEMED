@@ -22,4 +22,4 @@ const StoreSchema = new Schema({
  })
 
 StoreSchema.plugin(passportLocalMongoose); 
- module.exports = mongoose.model('Store', StoreSchema);
+module.exports = mongoose.model('MedicalStore', StoreSchema);

@@ -12,7 +12,7 @@
   margin-top: 0.2%;
   }
 
-  #Alldoctors{
+  #Alldiseases{
     margin-top: 0%;
     margin-left: 5%;
     margin-right: 5%;
@@ -20,9 +20,10 @@
 </style>
   
 <body>
-    <h1>Doctors....</h1>
-    <div id="Alldoctors">
-        <% for (let doctor of doctors) { %>
+    
+    <h1>Diseases</h1>
+    <div id="Alldiseases">
+        <% for (let disease of diseases) { %>
             <div class="card">
                 <div class="row">
                     <div class="col-md-4">
@@ -30,12 +31,11 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5><strong><%= doctor.username %> </strong></h5>
-                            <h6><%= doctor.specialization %> </h6>
-                            <h6><%= doctor.educationlevel %> </h6>
-                            <h6><%= doctor.phone %> </h6>
+                            <h5><strong><%= disease.name %> </strong></h5>
                             
-                            <a class="btn btn-primary" href="/appointment/<%=doctor._id%>">Book Appointment </a>
+                           
+                            
+                            <a class="btn btn-primary" href="/disease/getMedicines/<%= disease.name %>">View Medicines </a>
                           
                         </div>
                     </div>

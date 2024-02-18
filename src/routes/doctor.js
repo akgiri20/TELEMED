@@ -2,9 +2,11 @@ const express=require('express');
 const router=express.Router();
 const catchAsync =require('../utils/catchAsync');
 const Doctor=require('../models/doctor');
+const PatientAppointment=require('../models/patientAppointment');
 const Specialist= require('../models/Specialist');
 const flash=require('connect-flash');
 const passport=require('passport');
+const mongoose = require('mongoose');
 
 
 router.get('/doctorregister', async (req, res) => {
@@ -53,9 +55,9 @@ router.get('/doctorlogin',async(req,res)=>{
     res.render('doctor/login')
 })
 
-router.post('/doctorlogin',passport.authenticate('local',{failureFlash:true,failureRedirect:'/doctorlogin'}),(req,res)=>{
+router.post('/doctorlogin',passport.authenticate('Doctor',{failureFlash:true,failureRedirect:'/doctorlogin'}),(req,res)=>{
 
-    req.flash('success','welcome back!! you are successfully logged in');
+req.flash('success','welcome back!! you are successfully logged in');
 const redirectUrl = req.session.returnTo || '/';
 delete req.session.returnTo;
 res.redirect(redirectUrl);
@@ -67,5 +69,41 @@ router.get('/logout', (req, res) => {
     req.flash('success', "Goodbye!");
     res.redirect('/');
 })
+
+router.get('/appointment/:id', async(req,res) => {
+    const { id } = req.params;
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).send('Invalid ObjectId');
+  }
+
+  const doctorId = mongoose.Types.ObjectId(id);
+
+  // Render the appointment creation page with the doctor ID as a parameter
+  res.render('users/appointmentForm', { doctorId });
+});
+   
+
+router.post('/appointment/:id', async(req,res) => {
+    
+        try {
+            const { age, name, address, phone, issue } = req.body;
+            const { id } = req.params;
+
+            if (!mongoose.isValidObjectId(id)) {
+                return res.status(400).send('Invalid ObjectId');
+            }
+    
+            // Create a new appointment object
+            const appointment = new PatientAppointment({ age, name, address, phone, issue, doctorID: id });
+            await appointment.save();
+            req.flash('success', 'Successfully made a new appointment!');
+            res.redirect('/appointment');
+        } 
+        catch (e) {
+            req.flash('error', e.message);
+            res.redirect('/appointment/:id');
+        }
+    
+});
 
 module.exports=router;

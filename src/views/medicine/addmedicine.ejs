@@ -20,50 +20,24 @@
     <h1 class="text-center">Register</h1>
      <div class="col-6 offset-3">
     
-      <form action="/medicalstoreregister" method="POST" novalidate class="row g-3 needs-validation">
+      <form action="/addmedicine" method="POST" novalidate class="row g-3 needs-validation">
         <div class="mb-3">
-            <label class="form-label" for="username">Name</label>
-            <input class="form-control" type="text" id="username" name="username" required>
+            <label class="form-label" for="name">Name</label>
+            <input class="form-control" type="text" id="name" name="name" required>
             <div class="valid-feedback">
                 valid!
             </div>
         </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="time">Time</label>
-          <input class="form-control" type="text" id="time" name="time" required>
-          <div class="valid-feedback">
-              valid!
-          </div>
-      </div>
     
         <div class="mb-3">
-          <label class="form-label" for="phone">Phone</label>
-          <input class="form-control" type="number" id="phone" name="phone" required>
-          <div class="valid-feedback">
-              valid!
-          </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label" for="address">Address</label>
-        <input class="form-control" type="text" id="address" name="address" required>
-        <div class="valid-feedback">
-            valid!
-        </div>
-    </div>
-
-    
-    
-        <div class="mb-3">
-            <label class="form-label" for="password">Password</label>
-            <input class="form-control" type="password" id="password" name="password" required>
+            <label class="form-label" for="fordisease">Disease</label>
+            <input class="form-control" type="text" id="fordisease" name="fordisease" required>
             <div class="valid-feedback">
                 valid!
             </div>
         </div>
         
-        <button class="btn btn-sm btn-success">Register</button>
+        <button class="btn btn-sm btn-success">Submit</button>
     </form>
     </div>
     </div>

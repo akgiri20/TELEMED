@@ -1,9 +1,10 @@
-const express=require('express');
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
 const catchAsync =require('../utils/catchAsync');
-const MedicalStore=require('../models/medicalStore');
-const flash=require('connect-flash');
-const passport=require('passport');
+const MedicalStore = require('../models/medicalStore');
+const flash= require('connect-flash');
+
 
 
 router.get('/medicalstoreregister', async (req, res) => {
@@ -34,19 +35,19 @@ router.get('/medicalstorelogin',async(req,res)=>{
     res.render('medicalstore/login')
 })
 
-router.post('/medicalstorelogin',passport.authenticate('local',{failureFlash:true,failureRedirect:'/medicalstorelogin'}),(req,res)=>{
+router.post('/medicalstorelogin', passport.authenticate('MedicalStore',{failureFlash:true,failureRedirect:'/medicalstorelogin'}),(req,res)=>{
 
-    req.flash('success','welcome back!! you are successfully logged in');
-const redirectUrl = req.session.returnTo || '/';
+req.flash('success','welcome back!! you are successfully logged in');
+const redirectUrl = req.session.returnTo || '/disease';  // '/addmedicine'
 delete req.session.returnTo;
 res.redirect(redirectUrl);
 })
 
 
-router.get('/logout', (req, res) => {
-    req.logout();
-    req.flash('success', "Goodbye!");
-    res.redirect('/');
-})
+// router.get('/logout', (req, res) => {
+//     req.logout();
+//     req.flash('success', "Goodbye!");
+//     res.redirect('/');
+// })
 
 module.exports=router;

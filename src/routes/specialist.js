@@ -10,6 +10,8 @@ router.get('/', async(req, res) => {
     res.render('specialist/index', { specialists })
 });
 
+
+
 router.get('/:id', async(req, res) => {
     const { id } = req.params;
    

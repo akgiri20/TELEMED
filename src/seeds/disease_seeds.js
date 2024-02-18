@@ -1,0 +1,9 @@
+module.exports=[
+    'Fever',
+    'Cold',
+    'Dyscentry',
+    'Cancer',
+    'Diabetes',
+    'Migrain',
+    'Fracture' 
+]
