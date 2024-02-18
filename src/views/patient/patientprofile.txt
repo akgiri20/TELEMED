@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/user.css">
+  <title>User Dashboard</title>
+</head>
+
+<body>
+  <main>
+
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+
+      <nav class="nav container">
+        <a href="#" class="nav__logo">
+          <img class="logo" src="assets/img/logo.svg" alt="">
+          <p class="logo__name"></p>
+        </a>
+
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+
+            <li class="nav__item">
+              <a href="#locate" class="nav__link">Locate</a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#analyze" class="nav__link">Analyze</a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#credits" class="nav__link">Credits</a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#redeem" class="nav__link">Redeem</a>
+            </li>
+          </ul>
+
+
+          <div class="user__info">
+            <img src="assets/img/man.png" alt="">
+            <p class="user__name"><%= currentUser.username %></p>
+          </div>
+
+          <!--  Close Button  -->
+          <div class="nav__close" id="nav-close">
+            <img class="icon" src="assets/img/close-line.svg" alt="close-icon">
+          </div>
+        </div>
+
+        <!--  Toggle Button  -->
+        <div class="nav__toggle" id="nav-toggle">
+          <img class="icon" src="assets/img/menu-line.svg" alt="menu-line">
+        </div>
+      </nav>
+    </header>
+
+    <!-- dashboard -->
+    <section class="userdash container">
+
+      <div class="cards">
+        <!-- Upcoming Pickups Card -->
+        <div class="card">
+          <h2>Upcoming Pickups</h2>
+          <p class="card__data"><%= currentUser.PendingReq.length %> Pending Requests</p>
+        </div>
+
+        <!-- Total Waste Recycled Card -->
+        <div class="card">
+          <h2>Waste Recycled</h2>
+          <p class="card__data">34 kg</p>
+        </div>
+
+        <!-- Current Credits Card -->
+        <div class="card">
+          <h2>Current Credits</h2>
+          <p class="card__data"><%= currentUser.CreditPoints %></p>
+        </div>
+      </div>
+
+      <!-- pickup requests -->
+      <div class="pickups container">
+
+        <div class="user__scheduled__pickups">
+          <h2 class="pickups__title">Upcoming appointment schedules:</h2>
+          <% if(currentUser.PendingReq.length == 0) { %>
+          <p class="pickup__facility__name"> No Pending Requests</p>
+          <% } else { %>
+          <div class="pickup__details credits__button-price">
+            <p class="pickup__facility__name"><%= currentUser.PendingReq[0].plantName %></p>
+            <p class="pickup__date"><%= currentUser.PendingReq[0].date %></p>
+            <p class="pickup__time">3:30pm - 4:30pm</p>
+          </div>
+          <% } %>
+        </div>
+      </div>
+
+    </section>
+
+    

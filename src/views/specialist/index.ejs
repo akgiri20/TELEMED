@@ -10,13 +10,13 @@
 <style>
   .wrapper {
     /* margin-left:75%; */
-    margin-top: 0.2%;
+    margin-top: 1%;
   }
 
   #Allspecialists {
     margin-top: 0%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
   }
 </style>
 
@@ -24,157 +24,131 @@
 
   <h1>Specializations</h1>
   <div id="Allspecialists">
-   
+    <% for (let specialist of specialists) { %>
+    <div class="card">
+      <div class="row">
+        <div class="col-md-4">
+          <!-- <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Fsearch%3Fwallpaper%3DMedical%252C%2BDoctor&psig=AOvVaw0BYLJA-_sLoAm0LUj0iRXT&ust=1708278666414000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCODL3pL4soQDFQAAAAAdAAAAABAD" alt="" class="img-fluid mt-4 mb-4 ms-2" width="230" height="160"> -->
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5><strong><%= specialist.name %> </strong></h5>
+
+            <p class="card-text"><i><%= specialist.detail %></i> </p>
+
+            <a class="btn btn-primary" href="/specialist/<%=specialist._id%>">View <%= specialist.name %> </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <% } %>
   </div>
 </body>
 
-</html>
-
-
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-  <header>
-  
-
-<div tabindex="0" class="carousel--item two card">
-
-<h1><%= specialists[2].name %> </h1>
-  <h1><a class="btn btn-primary" href="/specialist/<%=specialists[2]._id%>">View <%= specialists[2].name %> </a>   
-    <p class="card-text"><i><%= specialists[2].detail %></i> </p>
-    
-  </h1>
-</div>
-
-
-
-  </header>
-</body>
 
 <style>
-  .carousel {
+   /* Card container style */
+   body{
+    background-color: #d6daa1;
+   }
+   .card {
+    background-color: #add8e6; /* blue */
+   border-radius: 15px;
+   box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.1);
+   margin-bottom: 80px;
+   opacity: 0; /* Initially hidden */
+   height: 500px; /* Set desired height */
+   display: flex; /* Use flexbox for vertical alignment */
+   flex-direction: column; /* Stack children vertically */
+   justify-content: center; /* Center content vertically */
+   }
 
-    margin-left: 13rem;
-    margin-right: 13rem;
+   /* Card animation */
+   @keyframes slideInLeft {
+   0% {
+   transform: translateX(-150%);
+   opacity: 0;
+   }
+   100% {
+   transform: translateX(0);
+   opacity: 1;
+   }
+   }
 
-    display: flex;
-    gap: 7em;
-    padding: 2px;
+   @keyframes slideInRight {
+   50% {
+   transform: translateX(150%);
+   opacity: 0;
+   }
+   100% {
+   transform: translateX(0);
+   opacity: 1;
+   }
+   }
 
-    /* adds scrolling for the element: */
-    overflow-x: scroll;
-    /* removes the horizontal scrollbar: */
+   /* Apply animation to each card */
+   .card:nth-child(odd) {
+   animation: slideInLeft 2s ease forwards;
+   }
 
+   .card:nth-child(even) {
+   animation: slideInRight 2s ease forwards;
+   }
 
-  }
+   /* Card image style */
+   .card img {
+   border-top-left-radius: 15px;
+   border-top-right-radius: 15px;
+   object-fit: cover;
+   height: 250px; /* Adjust image height */
+   }
 
-  .card {
-    background-size: cover;
-    box-shadow: 5px 20px 20px 0 rgb(255, 249, 249);
-    box-decoration-break: slice;
-    border-radius: 20px;
-    box-sizing: border-box;
-    background-position: center;
-    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    text-align: center;
-    min-height: 400px;
-    min-width: 400px;
-    height: auto;
-    border-radius: 20px;
-    border-color: whitesmoke;
-    border-width: 100px;
-    color: #fff;
-    font-size: 2rem;
-  }
+   /* Card body style */
+   .card-body {
+   padding: 20px;
+   text-align: center; /* Center text */
+    text-transform: uppercase;
+   }
 
-  .carousel--item {
-    /* carousel item should have min-width declared: */
-    min-width: 400px;
-    /* carousel item should have defined height: */
-    height: 580px;
+   /* Card title style */
+   .card-body h5 {
+   margin-bottom: 15px;
+   color: #004080; /* Dark blue */
+   font-weight: bold;
+   font-size: 30px; /* Increase font size */
+    text-transform: uppercase;
+   }
 
-    border-radius: 1em;
-    background-position: center;
-    background-size: cover;
-    opacity: 1;
-    transition: 200ms ease;
-  }
+   /* Card text style */
+   .card-body p {
+   color: #333; /* Dark gray */
+   font-size: 18px; /* Increase font size */
+    text-transform: uppercase;
+   }
 
-  .carousel--item:hover {
-    opacity: 1;
-    scale: 1.11;
-    transform-origin: bottom;
-  }
+   /* Button style */
+   .card-body .btn-primary {
+   border-radius: 5px;
+   background-color: #004080; /* Dark blue */
+   border: none;
+   transition: background-color 2s ease;
+   font-size: 15px; /* Increase font size */
+    /* text-transform: uppercase; */
+   }
 
-  h1 {
-    font-size: 4rem;
-    font-family: copperplate gothic light;
-    font-weight: normal;
-    color: rgb(244, 243, 248);
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 6em;
-    background-color: black;
-  }
+   /* Hover effect for button */
+   .card-body .btn-primary:hover {
+   background-color: #00264d; /* Darker blue */
+   }
 
-  h2 {
-    font-size: 3rem;
-    font-family: copperplate gothic light;
-    font-weight: normal;
-    color: rgb(242, 240, 248);
-    text-align: left;
-    margin-left: auto;
+   /* Margin adjustment */
+   .wrapper {
+   margin-left: auto;
+   margin-right: auto;
+   max-width: 900px;
+   }
 
-
-
-  }
-
-  .carousel--item:focus-visible {
-    opacity: 1;
-    scale: 2;
-    transform-origin: bottom;
-    outline: 4px solid rgb(173, 173, 90);
-    outline-offset: 2px;
-  }
-
-  .one {
-    background-image: url('https://res.cloudinary.com/dtca2p99y/image/upload/v1675275292/mess/menu_zsbijm.png');
-  }
-
-  .two {
-    background-image: url('https://res.cloudinary.com/dtca2p99y/image/upload/v1675275292/mess/menu_zsbijm.png');
-  }
-
-  .three {
-    background-image: url('https://res.cloudinary.com/dtca2p99y/image/upload/v1675275292/mess/menu_zsbijm.png');
-  }
-
-  .four {
-    background-image: url('https://res.cloudinary.com/dtca2p99y/image/upload/v1675275292/mess/menu_zsbijm.png');
-  }
-
-  .five {
-    background-image: url('https://res.cloudinary.com/dtca2p99y/image/upload/v1675275292/mess/menu_zsbijm.png');
-  }
-
-  .six {
-    background-image: url('https://res.cloudinary.com/dtca2p99y/image/upload/v1675275292/mess/menu_zsbijm.png');
-  }
-
-  .seven {
-    background-image: url('https://res.cloudinary.com/dtca2p99y/image/upload/v1675275292/mess/menu_zsbijm.png');
-  }
-
-  body {
-    background-image: url('https://res.cloudinary.com/dtca2p99y/image/upload/v1675107463/mess/index3_t26ctr.png');
-  }
 </style>
+</html>

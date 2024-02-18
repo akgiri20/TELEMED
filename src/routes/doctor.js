@@ -72,7 +72,7 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", "welcome back!! you are successfully logged in");
-    const redirectUrl = req.session.returnTo || "/";
+    const redirectUrl = req.session.returnTo || "/home";
     delete req.session.returnTo;
     res.redirect(redirectUrl);
   }
@@ -81,7 +81,7 @@ router.post(
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success", "Goodbye!");
-  res.redirect("/");
+  res.redirect("/home");
 });
 
 module.exports = router;

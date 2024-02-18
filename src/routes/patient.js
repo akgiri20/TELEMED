@@ -43,6 +43,11 @@ router.post(
   }
 );
 
+router.get("/patientprofile",async(req,res)=>{
+res.render("patient/patientprofile")
+})
+
+
 router.get("/home", async (req, res) => {
   res.render("home");
 });

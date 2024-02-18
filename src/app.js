@@ -84,6 +84,12 @@ app.use("/", medicalRoutes);
 app.use("/", doctorRoutes);
 app.use("/specialist", specialistRoutes);
 
+app.get('/education',async(req,res)=>{
+res.render('education');
+})
+
+
+
 app.listen(3000, () => {
   console.log("Serving on port 3000");
 });

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="img-container">
+    
+    <img class="img1" src="https://res.cloudinary.com/dtca2p99y/image/upload/v1708232269/image_1_kfqpms.png" />
+    
+    <img class="img2" src="https://res.cloudinary.com/dtca2p99y/image/upload/v1708233218/image_6_clyjqz.png" />
+    <img class="img3" src="https://res.cloudinary.com/dtca2p99y/image/upload/v1708232950/image_4_lmjv5m.png" />
+    <img class="img4" src="https://res.cloudinary.com/dtca2p99y/image/upload/v1708232653/image_3_dulg30.png" />
+    <img class="img5" src="https://res.cloudinary.com/dtca2p99y/image/upload/v1708233091/image_5_ntpwzl.png" />
+    
+
+    <div class="arrows">
+      <svg class="prev" viewBox="0 0 256 512" width="100" title="angle-left">
+        <path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z" />
+      </svg>
+      <svg class="next" viewBox="0 0 256 512" width="100" title="angle-right">
+        <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" />
+      </svg>
+    </div>
+  </div>
+
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .img-container {
+      width: 100vw;
+      height: 100vh;
+      background-color: rgb(56, 146, 176);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .img-container img {
+      width: 800px;
+      height: 600px;
+      background-color: #87A0E2;
+      border-radius: 16px;
+      position: absolute;
+      user-select: none;
+      transition-property: transform, opacity, zIndex, ;
+      transition-duration: 0.3s;
+      transition-timing-function: ease-out;
+    }
+
+    .arrows {
+      width: 900px;
+      height: auto;
+      display: flex;
+      justify-content: space-between;
+      z-index: 100;
+    }
+
+    .arrows svg {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      fill: white;
+      opacity: 0.8;
+      cursor: pointer;
+    }
+
+    .arrows svg:active {
+      transform: scale(0.9);
+      opacity: 1;
+      transition-property: transform, opacity;
+      transition-duration: 0.3s;
+      transition-timing-function: ease-out;
+    }
+  </style>
+
+  <script>
+    const imgs = document.querySelectorAll('img');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+
+    let index = 0;
+
+    function layout() {
+      const xOffsetStep = 100;
+      const count = imgs.length;
+      const scaleStep = 0.6;
+      const opacityStep = 0.5;
+
+      for (let i = 0; i
+
+        <
+        imgs.length; i++) {
+        img = imgs[i];
+        const sign = Math.sign(i - index);
+        let xOffset = (i - index) * xOffsetStep;
+        if (i !== index) {
+          xOffset = xOffset + 80 * sign;
+        }
+        const scale = scaleStep ** Math.abs(i - index);
+        const rotateY = i === index ? 0 : 30 * -sign;
+        img.style.transform = `perspective(800px) translateX(${xOffset}px) scale(${scale}) rotateY(${rotateY}deg)`;
+        let opacity = opacityStep ** Math.abs(i - index);
+        if (Math.abs(i - index) > 2) {
+          opacity = 0
+        }
+        img.style.opacity = opacity;
+
+        img.style.zIndex = count - Math.abs(index - i);
+
+      }
+    }
+    layout();
+
+    next.addEventListener('click', () => {
+      index++;
+      if (index > imgs.length - 1) {
+        index = imgs.length - 1;
+      }
+      layout();
+    })
+
+    prev.addEventListener('click', () => {
+      index--;
+      if (index < 0) {
+        index = 0;
+      }
+      layout();
+    })
+  </script>
+</body>
+
+</html>
