@@ -34,7 +34,7 @@ router.get('/doctorlogin',async(req,res)=>{
     res.render('doctor/login')
 })
 
-router.post('/doctorlogin',passport.authenticate('local',{failureFlash:true,failureRedirect:'/doctorlogin'}),(req,res)=>{
+router.post('/doctorlogin',passport.authenticate('Doctor',{failureFlash:true,failureRedirect:'/doctorlogin'}),(req,res)=>{
 
     req.flash('success','welcome back!! you are successfully logged in');
 const redirectUrl = req.session.returnTo || '/';

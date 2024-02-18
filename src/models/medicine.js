@@ -4,12 +4,10 @@ const MedicalStore=require('./medicalStore')
 
 const MedicineSchema = new Schema({
     name: {
-        type: String,
-        required: true
+        type: String
     },
     fordisease: {
-        type: String,
-        required: true
+        type: String
     },
     medicalstores: [
         {

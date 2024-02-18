@@ -67,23 +67,22 @@ app.use(flash());
 
 //this is passport initialization for medicalstores
 app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(MedicalStore.authenticate()));  
+app.use(passport.session()); //always remember passport.session in written after app.use(session()).
+passport.use("MedicalStore", new LocalStrategy(MedicalStore.authenticate()));
 passport.serializeUser(MedicalStore.serializeUser());
-passport.deserializeUser(MedicalStore.deserializeUser());
+passport.deserializeUser(MedicalStore.deserializeUser()); //this 2 statements are for adding and removing user from session.
 
-passport.use(new LocalStrategy(Patient.authenticate()));  
-
-passport.serializeUser(Patient.serializeUser());
-passport.deserializeUser(Patient.deserializeUser());
-
-passport.use(new LocalStrategy(Doctor.authenticate()));  
-
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use("Doctor", new LocalStrategy(Doctor.authenticate()));
 passport.serializeUser(Doctor.serializeUser());
 passport.deserializeUser(Doctor.deserializeUser());
 
-
-
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(Patient.authenticate()));  
+passport.serializeUser(Patient.serializeUser());
+passport.deserializeUser(Patient.deserializeUser());
 
 
 app.use((req, res, next) => {

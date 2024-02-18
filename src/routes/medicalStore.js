@@ -20,10 +20,8 @@ router.post('/medicalstoreregister', catchAsync(async (req, res, next) => {
             if (err) return next(err);
             req.flash('success', 'MESS!!');
             console.log(req.body)
-            res.redirect('/addmedicine');
-            
+            res.redirect('/');
         })
-
     } catch (e) {
         req.flash('error', e.message);
         res.redirect('/medicalstoreregister');
@@ -34,21 +32,18 @@ router.get('/medicalstorelogin',async(req,res)=>{
     res.render('medicalstore/login')
 })
 
-router.post('/medicalstorelogin',passport.authenticate('local',{failureFlash:true,failureRedirect:'/medicalstorelogin'}),(req,res)=>{
+router.post('/medicalstorelogin',passport.authenticate('MedicalStore',{failureFlash:true,failureRedirect:'/medicalstorelogin'}),(req,res)=>{
 
-    req.flash('success','welcome back!! you are successfully logged in');
-const redirectUrl = req.session.returnTo || '/addmedicine';
-delete req.session.returnTo;
-res.redirect(redirectUrl);
+    req.flash('success', 'welcome ');
+    const redirectUrl = req.session.returnTo || '/addmedicine';
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
 })
-
 
 router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success', "Goodbye!");
     res.redirect('/');
 })
-
-
 
 module.exports=router;

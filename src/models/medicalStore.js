@@ -5,10 +5,6 @@ const Medicines=require('./medicine');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const StoreSchema = new Schema({
-    username: {
-        type: String,
-        required: true
-    },
     time: {
          type: String,
          required: true
@@ -20,8 +16,19 @@ const StoreSchema = new Schema({
     address: {
         type: String,
         required: true
+    },
+     Location: {
+        type: {
+            type: String,
+            enum: ["Point"],
+            required: true
+        },
+        coordinates: {
+          type: [Number],
+          required: true
+        }
     }
  })
 
 StoreSchema.plugin(passportLocalMongoose); 
- module.exports = mongoose.model('Store', StoreSchema);
+ module.exports = mongoose.model('MedicalStore', StoreSchema);
