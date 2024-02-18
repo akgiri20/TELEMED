@@ -4,7 +4,7 @@ const passport = require("passport");
 const Patient = require("../models/patient");
 const flash = require("connect-flash");
 
-const catchAsync = require("../utilities/catchAsync");
+const catchAsync = require("../utils/catchAsync");
 
 //const { isValidUser, isLoggedIn } = require('../middleware');
 
@@ -32,12 +32,9 @@ router.get("/patient_login", (req, res) => {
   res.render("patient/login");
 });
 
-router.post(
-  "/patient_login",
-  passport.authenticate("local", { failureFlash: true, failureRedirect: "/" }),
-  (req, res) => {
-    req.flash("success", "Welcome back!");
-    const redirectUrl = req.session.returnTo || "/patient_home";
+router.post('/patient_login',async (req, res) => {
+    req.flash('success', 'Welcome back!');
+    const redirectUrl = req.session.returnTo || '/patient_home';
     delete req.session.returnTo;
     res.redirect(redirectUrl);
   }

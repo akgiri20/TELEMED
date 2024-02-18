@@ -5,20 +5,25 @@ const ejsMate = require("ejs-mate");
 const joi = require("joi");
 const catchAsync = require("./utilities/catchAsync");
 const bodyParser = require("body-parser");
+const MedicalStore=require('./models/medicalStore')
+const Doctor=require('./models/doctor')
+const Patient= require('./models/patient');
 
-const ExpressError = require("./utilities/ExpressError");
-const methodOverride = require("method-override");
-const mongoose = require("mongoose");
-const flash = require("connect-flash");
+const ExpressError= require('./utilities/ExpressError');
+const methodOverride= require('method-override');
+const mongoose= require('mongoose');
+const flash= require('connect-flash');
 
 const session = require("express-session");
 const { date } = require("joi");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
-const Patient = require("./models/patient");
-const MedicalStore = require("./models/medicalStore");
-const Doctor = require("./models/doctor");
+const userRoutes= require('./routes/patient');
+const addmedicineRoutes=require('./routes/addmedicine')
+const doctorRoutes=require('./routes/doctor');
+const medicalStoreRoutes=require('./routes/medicalStore');
+
 
 mongoose.connect("mongodb://127.0.0.1/Rural-healthcare");
 
@@ -58,18 +63,23 @@ app.use(flash());
 
 //this is passport initialization for medicalstores
 app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(MedicalStore.authenticate()));
+app.use(passport.session()); //always remember passport.session in written after app.use(session()).
+passport.use("MedicalStore", new LocalStrategy(MedicalStore.authenticate()));
 passport.serializeUser(MedicalStore.serializeUser());
-passport.deserializeUser(MedicalStore.deserializeUser());
+passport.deserializeUser(MedicalStore.deserializeUser()); //this 2 statements are for adding and removing user from session.
 
-passport.use(new LocalStrategy(Patient.authenticate()));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use("Doctor", new LocalStrategy(Doctor.authenticate()));
+passport.serializeUser(Doctor.serializeUser());
+passport.deserializeUser(Doctor.deserializeUser());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(Patient.authenticate()));  
 passport.serializeUser(Patient.serializeUser());
 passport.deserializeUser(Patient.deserializeUser());
 
-passport.use(new LocalStrategy(Doctor.authenticate()));
-passport.serializeUser(Doctor.serializeUser());
-passport.deserializeUser(Doctor.deserializeUser());
 
 app.use((req, res, next) => {
   console.log(req.session);
@@ -79,16 +89,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", userRoutes);
-app.use("/", medicalRoutes);
-app.use("/", doctorRoutes);
-app.use("/specialist", specialistRoutes);
-
-app.get('/education',async(req,res)=>{
-res.render('education');
-})
-
-
+app.use('/', userRoutes);
+app.use('/',addmedicineRoutes);
+app.use('/',doctorRoutes);
+app.use('/',medicalStoreRoutes);
 
 app.listen(3000, () => {
   console.log("Serving on port 3000");

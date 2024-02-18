@@ -66,7 +66,7 @@ router.get("/doctorlogin", async (req, res) => {
 
 router.post(
   "/doctorlogin",
-  passport.authenticate("local", {
+  passport.authenticate("Doctor", {
     failureFlash: true,
     failureRedirect: "/doctorlogin",
   }),
