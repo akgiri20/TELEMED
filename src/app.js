@@ -23,6 +23,8 @@ const userRoutes= require('./routes/patient');
 const addmedicineRoutes=require('./routes/addmedicine')
 const doctorRoutes=require('./routes/doctor');
 const medicalStoreRoutes=require('./routes/medicalStore');
+const diseaseRoutes=require('./routes/disease')
+const specialistRoutes=require('./routes/specialist')
 
 
 mongoose.connect("mongodb://127.0.0.1/Rural-healthcare");
@@ -33,10 +35,10 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
-const userRoutes = require("./routes/patient");
-const doctorRoutes = require("./routes/doctor");
-const specialistRoutes = require("./routes/specialist");
-const medicalRoutes = require("./routes/medicalStore");
+// // const userRoutes = require("./routes/patient");
+// const doctorRoutes = require("./routes/doctor");
+// const specialistRoutes = require("./routes/specialist");
+// const medicalRoutes = require("./routes/medicalStore");
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
@@ -93,6 +95,9 @@ app.use('/', userRoutes);
 app.use('/',addmedicineRoutes);
 app.use('/',doctorRoutes);
 app.use('/',medicalStoreRoutes);
+app.use("/disease", diseaseRoutes);
+app.use("/specialist", specialistRoutes);
+
 
 app.listen(3000, () => {
   console.log("Serving on port 3000");

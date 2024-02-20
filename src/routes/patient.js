@@ -44,9 +44,34 @@ router.get("/patientprofile",async(req,res)=>{
 res.render("patient/patientprofile")
 })
 
+router.get('/appointmentReq',async(req,res)=>{
+    res.render('patient/appointmentReq');
+})
+
+router.post("/appointmentReq",async(req,res)=>{
+    
+});
 
 router.get("/home", async (req, res) => {
   res.render("home");
+});
+
+router.get("/telepharm", async (req, res) => {
+  res.render("telepharm");
+});
+router.get("/teleconsult", async (req, res) => {
+  res.render("teleconsult");
+});
+router.get("/community", async (req, res) => {
+  res.render("community");
+});
+
+router.get("/about", async (req, res) => {
+  res.render("about");
+});
+
+router.get('/map',async(req,res)=>{
+  res.render('map');
 });
 
 module.exports = router;

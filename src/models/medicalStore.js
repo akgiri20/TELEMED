@@ -16,17 +16,6 @@ const StoreSchema = new Schema({
     address: {
         type: String,
         required: true
-    },
-     Location: {
-        type: {
-            type: String,
-            enum: ["Point"],
-            required: true
-        },
-        coordinates: {
-          type: [Number],
-          required: true
-        }
     }
  })
 

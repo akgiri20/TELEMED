@@ -32,10 +32,15 @@ router.get('/medicalstorelogin',async(req,res)=>{
     res.render('medicalstore/login')
 })
 
+router.get("/medicalstoreprofile", async (req, res) => {
+  res.render("medicalstore/medicalstoreprofile")
+});
+
+
 router.post('/medicalstorelogin',passport.authenticate('MedicalStore',{failureFlash:true,failureRedirect:'/medicalstorelogin'}),(req,res)=>{
 
     req.flash('success', 'welcome ');
-    const redirectUrl = req.session.returnTo || '/addmedicine';
+    const redirectUrl = req.session.returnTo || 'medicalstoreprofile';
     delete req.session.returnTo;
     res.redirect(redirectUrl);
 })
@@ -43,7 +48,7 @@ router.post('/medicalstorelogin',passport.authenticate('MedicalStore',{failureFl
 router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success', "Goodbye!");
-    res.redirect('/');
+    res.redirect('/home');
 })
 
 module.exports=router;

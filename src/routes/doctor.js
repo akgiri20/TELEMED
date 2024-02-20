@@ -78,6 +78,24 @@ router.post(
   }
 );
 
+// router.get("/doctorprofile", async (req, res) => {
+//   res.render("doctor/profile");
+// });
+
+// router.post(
+//   "/doctorprofile",
+//   passport.authenticate("Doctor", {
+//     failureFlash: true,
+//     failureRedirect: "/doctorprofile",
+//   }),
+//   (req, res) => {
+//     req.flash("success", "welcome back!! profile displayed");
+//     const redirectUrl = req.session.returnTo || "/home";
+//     delete req.session.returnTo;
+//     res.redirect(redirectUrl);
+//   }
+// );
+
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success", "Goodbye!");

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gravity Coding</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- <div class="main-p"></div> -->
+  <div id="main">
+    <div id="top" >
+      <h1 id="top-h1" > TELE</h1>
+    </div>
+
+    <div id="center">
+      <div class="content">
+
+
+        <h3><i>CONSULT THE  DOCTORS ACCORDING TO SPECIALISATIONS</h3>
+        <div class="btn">
+          <a href="/specialist" style="text-decoration: none;">
+            <h5 style="align-items: center;">VIEW</h5>
+          </a>
+        </div>
+        <h2></h2>
+
+
+      </div>
+    </div>
+    <div id="bottom" >
+      <h1 id="bottom-h1"> CONSULT</h1>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js" integrity="sha512-AMl4wfwAmDM1lsQvVBBRHYENn1FR8cfOTpt8QVbb/P55mYOdahHD4LmHM1W55pNe3j/3od8ELzPf/8eNkkjISQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="script.js"></script>
+  <script>
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#main",
+        // markers:true,
+        start: "50% 50%",
+        end: "150% 50%",
+        scrub: 2,
+        pin: true
+      }
+    });
+    tl
+      .to("#center", {
+        height: "100vh",
+      }, 'a')
+      .to("#top", {
+        top: "-50%",
+      }, 'a')
+      .to("#bottom", {
+        bottom: "-50%",
+      }, 'a')
+      .to("#top-h1", {
+        top: "60%"
+      }, 'a')
+      .to("#bottom-h1", {
+        bottom: "-30%"
+      }, 'a')
+      .to("#center-h1", {
+        top: "-30%"
+      }, 'a')
+      .to(".content", {
+        delay: -0.2,
+        marginTop: "0%"
+      })
+  </script>
+</body>
+
+<style>
+ 
+
+  @font-face {
+    font-family: Founder;
+    src: url(FoundersGroteskCondensed-Bold.ttf);
+  }
+
+  @font-face {
+    font-family: CardinalR;
+    src: url(cardinalfruitweb-regular.ttf);
+  }
+
+  @font-face {
+    font-family: Cardinali;
+    src: url(cardinalfruitweb-italic.ttf);
+  }
+
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    
+  }
+
+  .main-p {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(61, 61, 61);
+  }
+
+  #main {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(0, 0, 0);
+    overflow: hidden;
+  }
+
+  #top {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 50vh;
+    background: linear-gradient(to right, #ff5757, #8652ff);
+    z-index: 9;
+    overflow: hidden;
+  }
+
+  #center {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    transform-origin: center;
+    background-color: rgb(0, 0, 0);
+    transition: all cubic-bezier(0.19, 1, 0.22, 1)1s;
+    overflow: hidden;
+  }
+
+  #bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50vh;
+   background: linear-gradient(to right, #ff5757, #8652ff);
+    overflow: hidden;
+  }
+
+  #main h1 {
+    font-family: Founder;
+    /* font-size: 20vw; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #top-h1 {
+    bottom: 5%;
+    font-size: 12vw;
+    position: absolute;
+
+
+  }
+
+  #bottom-h1 {
+    font-size: 12vw;
+    top: 35% !important;
+
+  }
+
+  .content {
+    margin-top: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    color: #fff;
+    gap: 4vh;
+  }
+
+  .content h4 {
+    font-size: 1vw;
+    font-family: Founder;
+  }
+
+  .content h3 {
+    width: 22%;
+    font-size: 3vw;
+    font-family: CardinalR;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  .content .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7vw;
+    height: 2vw;
+    border-radius: 50px;
+    background-color: #fff;
+    color: #0d0d0d;
+    font-family: Founder;
+  }
+
+  .content h2 {
+    font-size: 10vw;
+    font-family: Founder;
+  }
+</style>
+
+</html>
