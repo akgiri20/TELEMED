@@ -34,7 +34,7 @@ router.get("/patient_login", (req, res) => {
 
 router.post('/patient_login',async (req, res) => {
     req.flash('success', 'Welcome back!');
-    const redirectUrl = req.session.returnTo || '/patient_home';
+    const redirectUrl = req.session.returnTo || '/patientprofile';
     delete req.session.returnTo;
     res.redirect(redirectUrl);
   }
@@ -44,9 +44,7 @@ router.get("/patientprofile",async(req,res)=>{
 res.render("patient/patientprofile")
 })
 
-router.get('/appointmentReq',async(req,res)=>{
-    res.render('patient/appointmentReq');
-})
+
 
 router.post("/appointmentReq",async(req,res)=>{
     
@@ -57,21 +55,24 @@ router.get("/home", async (req, res) => {
 });
 
 router.get("/telepharm", async (req, res) => {
-  res.render("telepharm");
+  res.render("users/telepharm");
 });
 router.get("/teleconsult", async (req, res) => {
-  res.render("teleconsult");
+  res.render("users/teleconsult");
 });
 router.get("/community", async (req, res) => {
-  res.render("community");
+  res.render("users/community");
 });
 
 router.get("/about", async (req, res) => {
-  res.render("about");
+  res.render("users/about");
 });
 
+router.get('/education',async(req,res)=>{
+  res.render('users/education')
+})
 router.get('/map',async(req,res)=>{
-  res.render('map');
+  res.render('users/map');
 });
 
 module.exports = router;

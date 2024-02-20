@@ -28,7 +28,7 @@ router.post(
         if (err) return next(err);
         req.flash("success", "MESS!!");
         console.log(req.body);
-        //res.redirect('/');
+        res.redirect("/home");
       });
 
       try {
@@ -72,12 +72,15 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", "welcome back!! you are successfully logged in");
-    const redirectUrl = req.session.returnTo || "/home";
+    const redirectUrl = req.session.returnTo || "doctorprofile";
     delete req.session.returnTo;
     res.redirect(redirectUrl);
   }
 );
 
+router.get('/doctorprofile',(req,res)=>{
+  res.render('doctor/doctorprofile');
+})
 // router.get("/doctorprofile", async (req, res) => {
 //   res.render("doctor/profile");
 // });
