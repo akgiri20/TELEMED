@@ -1,126 +1,169 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>Register Page</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-
 <body>
-	<div class="login-page">
-		<div class="form">
-			<h2>Patient REGISTER HERE</h2>
-			<form action="/patient_register" method="POST" class="validated-form">
-				<div class="mb-3">
-					<label class="form-label" for="name">Username</label>
-					<input class="form-control" type="text" id="name" name="username" required autofocus>
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="age">Age</label>
-					<input class="form-control" type="number" id="age" name="age" required autofocus>
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="address">Address</label>
-					<input class="form-control" type="text" id="address" name="address" required autofocus>
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="phone">Phone</label>
-					<input class="form-control" type="number" id="phone" name="phone" required autofocus>
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="password">Password</label>
-					<input class="form-control" type="password" id="password" name="password" required>
-				</div>
-				<button class="btn btn-success btn-block">Register</button>
-			</form>
-		</div>
-	</div>
+  <div class="square">
+    <i style="--clr:#00ff0a;"></i>
+    <i style="--clr:#ff0057;"></i>
+    <i style="--clr:#fffd44;"></i>
+    <div class="login">
+      <h2> Sign In</h2>
+      <form action="/patient_login" method="POST">
+
+        <div class="inputBx">
+          <input type="text" name="username" for="username" placeholder="Username">
+        </div>
+        <div class="inputBx">
+          <input type="password" name="password" for=" password" placeholder="Password">
+        </div>
+        <div class="inputBx">
+          <input type="submit" value="Sign in">
+        </div>
+        <div class="links">
+          <a href="#">Forget Password</a>
+          <a href="#">Signup</a>
+        </div>
+      </form>
+
+    </div>
+  </div>
 </body>
-
 <style>
-	body {
-		background-color: transparent;
-		background-image: url("https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png");
-		background-size: cover;
-	}
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 
-	.login-page {
-		width: 360px;
-		padding: 8% 0 0;
-		margin: auto;
-		background-color: transparent;
-		border-radius: 10px;
-		box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-	}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+  }
 
-	.form {
-		position: relative;
-		z-index: 1;
-		max-width: 360px;
-		margin: 0 auto 100px;
-		padding: 45px;
-		text-align: center;
-		background-color: rgba(255, 255, 255, 0.7);
-		border-radius: 20px;
-	}
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #63fc48, #ef2d2d);
+  }
 
-	.form input[type="text"],
-	.form input[type="password"],
-	.form input[type="number"] {
-		font-family: 'Roboto', sans-serif;
-		outline: none;
-		width: 100%;
-		border: 0;
-		margin: 0 0 15px;
-		padding: 15px;
-		box-sizing: border-box;
-		font-size: 14px;
-		border-radius: 20px;
-		background-color: rgba(255, 255, 255, 0.7);
-	}
+  .square {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-	.form button {
-		font-family: 'Roboto', sans-serif;
-		text-transform: uppercase;
-		outline: none;
-		background-color: #2196F3;
-		width: 100%;
-		border: 0;
-		padding: 15px;
-		color: #FFFFFF;
-		font-size: 14px;
-		-webkit-transition: all 0.3s ease;
-		transition: all 0.3s ease;
-		cursor: pointer;
-		border-radius: 20px;
-	}
+  .square i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
+  }
 
-	.form button:hover,
-	.form button:active,
-	.form button:focus {
-		background-color: #1976D2;
-	}
+  .square i:nth-child(1) {
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: animate 6s linear infinite;
+  }
 
-	.form h2 {
-		color: #333333;
-		font-size: 28px;
-		margin: 0 0 30px;
-	}
+  .square i:nth-child(2) {
+    border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+    animation: animate 4s linear infinite;
+  }
 
-	.form p.message {
-		color: #666666;
-		font-size: 14px;
-		margin-top: 15px;
-	}
+  .square i:nth-child(3) {
+    border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+    animation: animate2 10s linear infinite;
+  }
 
-	.form p.message a {
-		color: #2196F3;
-		text-decoration: none;
-	}
+  .square:hover i {
+    border: 6px solid var(--clr);
+    filter: drop-shadow(0 0 20px var(--clr));
+  }
 
-	.form p.message a:hover {
-		text-decoration: underline;
-	}
+  @keyframes animate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes animate2 {
+    0% {
+      transform: rotate(360deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  .login {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .login h2 {
+    font-size: 2em;
+    color: #fff;
+  }
+
+  .login .inputBx {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    /* Add margin-bottom to create a gap */
+  }
+
+  .login .inputBx input {
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .login .inputBx input[type="submit"] {
+    width: 100%;
+    background: #0078ff;
+    background: linear-gradient(45deg, #ff357a, #fff172);
+    border: none;
+    cursor: pointer;
+
+  }
+
+
+
+
+  .login .inputBx input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .login .links {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .login .links a {
+    color: #fff;
+    text-decoration: none;
+  }
 </style>
 
 </html>

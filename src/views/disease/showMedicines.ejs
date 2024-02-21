@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RuralHealthcare</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<style>
+  .wrapper {
+    /* margin-left:75%; */
+    margin-top: 1%;
+  }
+
+  #Allspecialists {
+    margin-top: 0%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+</style>
+
+<body>
+
+  <h1>Medicines</h1>
+  <div id="Allspecialists">
+    <% for (let med of medicines) { %>
+    <div class="card">
+      <div class="row">
+        <div class="col-md-4">
+          <!-- <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Fsearch%3Fwallpaper%3DMedical%252C%2BDoctor&psig=AOvVaw0BYLJA-_sLoAm0LUj0iRXT&ust=1708278666414000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCODL3pL4soQDFQAAAAAdAAAAABAD" alt="" class="img-fluid mt-4 mb-4 ms-2" width="230" height="160"> -->
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5><strong><%= med.name %></strong></h5>
+
+            <h6> for: <%= med.fordisease %> </h6>
+           
+
+
+
+<a class="btn btn-primary" href="/buy">Purchase</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <% } %>
+  </div>
+</body>
+
+
+<style>
+  /* Card container style */
+  body {
+    background-color: #add8e6;
+    /* Light blue background */
+  }
+
+  .card {
+    background-color: #db84bb;
+    /* Baby pink background */
+    /* White */
+    border-radius: 15px;
+    box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 80px;
+    opacity: 0;
+    /* Initially hidden */
+    height: 200px;
+    /* Set desired height */
+    display: flex;
+    /* Use flexbox for vertical alignment */
+    flex-direction: column;
+    /* Stack children vertically */
+    justify-content: center;
+    /* Center content vertically */
+  }
+
+  /* Card animation */
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-150%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    50% {
+      transform: translateX(150%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Apply animation to each card */
+  .card:nth-child(odd) {
+    animation: slideInLeft 2s ease forwards;
+  }
+
+  .card:nth-child(even) {
+    animation: slideInRight 2s ease forwards;
+  }
+
+  /* Card image style */
+  .card img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    object-fit: cover;
+    height: 250px;
+    /* Adjust image height */
+  }
+
+  /* Card body style */
+  .card-body {
+    padding: 20px;
+    text-align: center;
+    /* Center text */
+    text-transform: uppercase;
+  }
+
+  /* Card title style */
+  .card-body h5 {
+    margin-bottom: 15px;
+    color: #004080;
+    /* Dark blue */
+    font-weight: bold;
+    font-size: 30px;
+    /* Increase font size */
+    text-transform: uppercase;
+  }
+
+  /* Card text style */
+  .card-body p {
+    color: #333;
+    /* Dark gray */
+    font-size: 18px;
+    /* Increase font size */
+    text-transform: uppercase;
+  }
+
+  /* Button style */
+  .card-body .btn-primary {
+    border-radius: 5px;
+    background-color: #004080;
+    /* Dark blue */
+    border: none;
+    transition: background-color 2s ease;
+    font-size: 15px;
+    /* Increase font size */
+    /* text-transform: uppercase; */
+  }
+
+  /* Hover effect for button */
+  .card-body .btn-primary:hover {
+    background-color: #00264d;
+    /* Darker blue */
+  }
+
+  /* Margin adjustment */
+  .wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+  }
+</style>
+
+</html>

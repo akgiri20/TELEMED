@@ -1,46 +1,119 @@
-const express=require('express');
-const router=express.Router();
-const catchAsync =require('../utils/catchAsync');
-const Doctor=require('../models/doctor');
-const flash=require('connect-flash');
-const passport=require('passport');
+const express = require("express");
+const router = express.Router();
+const catchAsync = require("../utils/catchAsync");
+const Doctor = require("../models/doctor");
+const Specialist = require("../models/Specialist");
+const flash = require("connect-flash");
+const passport = require("passport");
 
+<<<<<<< HEAD
 router.get('/doctorregister', async (req, res) => {
     res.render('doctor/login')
 })
 
 router.post('/doctorregister', catchAsync(async (req, res, next) => {
+=======
+router.get("/doctorregister", async (req, res) => {
+  res.render("doctor/register");
+});
+
+router.post(
+  "/doctorregister",
+  catchAsync(async (req, res, next) => {
+>>>>>>> b9135f5072ebe30eefe6d8628e5167d1d6592f5d
     try {
+      console.log(req.body);
+      const { specialization, educationlevel, phone, username, password } =
+        req.body;
+      const doctor = new Doctor({
+        specialization,
+        educationlevel,
+        phone,
+        username,
+      });
+      const registeredUser = await Doctor.register(doctor, password);
+      req.login(registeredUser, (err) => {
+        if (err) return next(err);
+        req.flash("success", "MESS!!");
         console.log(req.body);
-        const { specialization,educationlevel,phone,username,password  } = req.body;
-        const doctor = new Doctor({ specialization,educationlevel,phone,username });
-        const registeredUser = await Doctor.register(doctor, password);
-        req.login(registeredUser, err => {
-            if (err) return next(err);
-            req.flash('success', 'MESS!!');
-            console.log(req.body)
-            res.redirect('/');
-            
-        })
+        res.redirect("/home");
+      });
 
+      try {
+        const specialists = await Specialist.find().lean(); // Get all specialists
+
+        // Iterate through each specialist
+        for (const specialist of specialists) {
+          const matchingDoctors = await Doctor.find({
+            specialization: specialist.name,
+          })
+            .select("_id")
+            .lean(); // Find doctors with matching specialization
+          const doctorIds = matchingDoctors.map((doctor) => doctor._id); // Extract doctor IDs
+
+          // Update specialist document with matching doctor IDs
+          await Specialist.findByIdAndUpdate(specialist._id, {
+            $addToSet: { doctor: { $each: doctorIds } },
+          });
+        }
+
+        console.log("Specialists updated successfully");
+      } catch (error) {
+        console.error("Error updating specialists:", error);
+      }
     } catch (e) {
-        req.flash('error', e.message);
-        res.redirect('/doctorregister');
+      req.flash("error", e.message);
+      res.redirect("/doctorregister");
     }
-}));
+  })
+);
 
-router.get('/doctorlogin',async(req,res)=>{
-    res.render('doctor/login')
+router.get("/doctorlogin", async (req, res) => {
+  res.render("doctor/login");
+});
+
+router.post(
+  "/doctorlogin",
+  passport.authenticate("Doctor", {
+    failureFlash: true,
+    failureRedirect: "/doctorlogin",
+  }),
+  (req, res) => {
+    req.flash("success", "welcome back!! you are successfully logged in");
+    const redirectUrl = req.session.returnTo || "doctorprofile";
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
+  }
+);
+
+router.get('/doctorprofile',(req,res)=>{
+  res.render('doctor/doctorprofile');
 })
+// router.get("/doctorprofile", async (req, res) => {
+//   res.render("doctor/profile");
+// });
 
-router.post('/doctorlogin',passport.authenticate('local',{failureFlash:true,failureRedirect:'/doctorlogin'}),(req,res)=>{
+// router.post(
+//   "/doctorprofile",
+//   passport.authenticate("Doctor", {
+//     failureFlash: true,
+//     failureRedirect: "/doctorprofile",
+//   }),
+//   (req, res) => {
+//     req.flash("success", "welcome back!! profile displayed");
+//     const redirectUrl = req.session.returnTo || "/home";
+//     delete req.session.returnTo;
+//     res.redirect(redirectUrl);
+//   }
+// );
 
-    req.flash('success','welcome back!! you are successfully logged in');
-const redirectUrl = req.session.returnTo || '/';
-delete req.session.returnTo;
-res.redirect(redirectUrl);
-})
+router.get("/logout", (req, res) => {
+  req.logout();
+  req.flash("success", "Goodbye!");
+  res.redirect("/home");
+});
 
+<<<<<<< HEAD
 
 router.get('/logout', (req, res) => {
     req.logout();
@@ -50,3 +123,6 @@ router.get('/logout', (req, res) => {
 
 module.exports=router;
 
+=======
+module.exports = router;
+>>>>>>> b9135f5072ebe30eefe6d8628e5167d1d6592f5d
