@@ -5,11 +5,15 @@ const Patient = require("../models/patient");
 const flash = require("connect-flash");
 
 const catchAsync = require("../utils/catchAsync");
+const { isLoggedIn} = require("../middleware");
 
 //const { isValidUser, isLoggedIn } = require('../middleware');
 
 router.get("/patient_register", (req, res) => {
   res.render("patient/register");
+});
+router.get("/patient_menu", (req, res) => {
+  res.render("patient/menu");
 });
 
 router.post("/patient_register", async (req, res, next) => {
@@ -46,33 +50,10 @@ res.render("patient/patientprofile")
 
 
 
-router.post("/appointmentReq",async(req,res)=>{
+// router.post("/appointmentReq",async(req,res)=>{
     
-});
+// });
 
-router.get("/home", async (req, res) => {
-  res.render("home");
-});
 
-router.get("/telepharm", async (req, res) => {
-  res.render("users/telepharm");
-});
-router.get("/teleconsult", async (req, res) => {
-  res.render("users/teleconsult");
-});
-router.get("/community", async (req, res) => {
-  res.render("users/community");
-});
-
-router.get("/about", async (req, res) => {
-  res.render("users/about");
-});
-
-router.get('/education',async(req,res)=>{
-  res.render('users/education')
-})
-router.get('/map',async(req,res)=>{
-  res.render('users/map');
-});
 
 module.exports = router;

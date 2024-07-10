@@ -10,6 +10,15 @@
 
 
 <body>
+
+   <div id="nav">
+     <div id="PART-1">
+       <h2>TELEMED</h2>
+     </div>
+     <div id="PART-2">
+       <a href="/patient_menu">Back</a>
+     </div>
+   </div>
   <div class="square">
     <i style="--clr:#00ff0a;"></i>
     <i style="--clr:#ff0057;"></i>
@@ -49,6 +58,26 @@
 
 <style>
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+#navhead {
+font-size: 0.7vw;
+color: antiquewhite;
+}
+
+
+#nav {
+height: 90px;
+width: 100%;
+position: fixed;
+top: 0;
+display: flex;
+padding: 0 20px;
+background-color: transparent;
+opacity: 1;
+z-index: 1000;
+
+align-items: center;
+justify-content: space-between;
+}
 
   * {
     margin: 0;

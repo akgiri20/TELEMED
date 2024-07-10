@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+
+  <title>EcoEase</title>
+</head>
+
+<body>
+
+  <section class="locate" id="locate">
+    <div class="locate__container container">
+      <div class="locate__content">
+
+        <h2 class="locate__title">
+          Find the nearest E-Waste Facility
+        </h2>
+
+        <div class="location__field">
+          <label class="location__label" for="location">Enter your location:</label>
+          <br>
+          <form action="/userdefloc" method="post" style="display: inline;">
+            <input class="location__input" type="text" id="location" name="location" placeholder="e.g., City, State, Country" required="true">
+            <button href="/userdefloc" type="submit" class="locate__button-search">Search</button>
+          </form>
+          <form action="/getCurrLoc" method="POST" style="display: inline;">
+            <input type="hidden" name="latitude" id="lat" value="">
+            <input type="hidden" name="longitude" id="lng" value="">
+            <button type="submit" class="locate__button-search">Find ME</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <div class="map__image">
+      <img src="assets/img/map-vector.png" alt="">
+    </div>
+  </section>
+
+  </div>
+  </div>
+  </div>
+  </section>
+
+
+  <!--=============== MAIN JS ===============-->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGl0YW5pdW01OTYiLCJhIjoiY2w2bmIwNWxwMHRqOTNqbzcxNWxzN240ZCJ9.zpgHYiL8reD3OPg-t1_TuQ';
+    const map = new mapboxgl.Map({
+      container: 'map', // container ID
+      // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+      style: 'mapbox://styles/mapbox/streets-v12', // style URL
+      center: [-24, 42], // starting center in [lng, lat]
+      zoom: 1 // starting zoom
+    });
+
+    // Add geolocate control to the map.
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        // When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true
+      })
+    );
+  </script>
+  <script>
+    function onGeoSuccess(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+
+      // NEXT 2 LINES WILL SET VALUE OF RESPECTIVE INPUTS
+      document.getElementById("lat").value = lat;
+      document.getElementById('lng').value = lng;
+    }
+
+    function onGeoError(err) {
+      console.error("Error while trying to get position", err);
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+      } else {
+        alert('GeoLocation not supported or not allowed');
+      }
+    });
+  </script>
+  <script>
+    /*=============== Popup divs ===============*/
+    // Get references to the select element, button, and divs
+    const select = document.getElementById("mySelect");
+    const button = document.getElementById("myButton");
+    const divs = document.querySelectorAll(".myDiv");
+
+    // Add an event listener to the button
+    button.addEventListener("click", () => {
+      // Get the selected value from the select element
+      const selectedValue = select.value;
+
+      // Hide all divs
+      divs.forEach((div) => {
+        div.style.display = "none";
+      });
+
+      // Show the selected div based on its ID
+      const selectedDiv = document.getElementById(selectedValue);
+      if (selectedDiv) {
+        selectedDiv.style.display = "block";
+      }
+    });
+  </script>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

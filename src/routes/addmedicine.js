@@ -5,10 +5,13 @@ const medicalStore=require('../models/medicalStore');
 const flash=require('connect-flash');
 const passport=require('passport');
 const Medicine=require('../models/medicine');
+const { isLoggedIn} = require("../middleware");
+
 
 router.get('/addmedicine',(req,res)=>{
     res.render('medicine/addmedicine')
 })
+
 
 router.post('/addmedicine', async (req, res) => {
     try {

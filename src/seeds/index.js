@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const MedicalStore = require('../models/medicalStore');
 
-mongoose.connect('mongodb://localhost:27017/Rural-healthcare' );
+mongoose.connect("mongodb://127.0.0.1/Rural-healthcare");
 
 const db = mongoose.connection;
 db.on("error" , console.error.bind(console , "connection error"));
@@ -14,8 +14,8 @@ const medicalStore =
 [
   {
     time: "10:00AM-10:00PM",
-    Phone: 8080892403,
-    Address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
+    phone: 8080892403,
+    address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
     username: "med1", 
     Location : {
         type: "Point",
@@ -24,8 +24,8 @@ const medicalStore =
   },
    {
     time: "10:00AM-10:00PM",
-    Phone: 8080892403,
-    Address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
+    phone: 8080892403,
+    address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
     username: "med2", 
     Location : {
         type: "Point",
@@ -34,8 +34,8 @@ const medicalStore =
   },
    {
     time: "10:00AM-10:00PM",
-    Phone: 8080892403,
-    Address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
+    phone: 8080892403,
+    address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
     username: "med3", 
     Location : {
         type: "Point",
@@ -44,8 +44,8 @@ const medicalStore =
   },
    {
     time: "10:00AM-10:00PM",
-    Phone: 8080892403,
-    Address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
+    phone: 8080892403,
+    address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
     username: "med4", 
     Location : {
         type: "Point",
@@ -54,8 +54,8 @@ const medicalStore =
   },
    {
     time: "10:00AM-10:00PM",
-    Phone: 8080892403,
-    Address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
+    phone: 8080892403,
+    address: "A-46, near Crowne Plaza, Pocket C, Okhla Phase I, Okhla, New Delhi, Delhi 110020",
     username: "med5", 
     Location : {
         type: "Point",
@@ -65,7 +65,7 @@ const medicalStore =
 ]
 
 const seeddb = async () => {
-  for(i = 0 ; i < ewasteloc.length ; i++){
+  for(i = 0 ; i < medicalStore.length ; i++){
       const temp = new MedicalStore(medicalStore[i]);
       const password = "1234";
       const registeredUser = await MedicalStore.register(temp , password);

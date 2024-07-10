@@ -40,6 +40,7 @@
     .wrapper {
       overflow-x: hidden;
       position: relative;
+      background-color: antiquewhite;
     }
 
     * {
@@ -107,6 +108,51 @@
       height: 100vh;
 
     }
+    #nav {
+    height: 90px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    display: flex;
+    padding: 0 20px;
+    background-color: #8ebfff;
+    opacity: 1;
+    z-index: 1000;
+
+    align-items: center;
+    justify-content: space-between;
+    }
+
+    #nav #PART-1{
+    left:0%;
+    font-size:1.2vw;
+    color: #000000;
+
+
+    }
+
+    #nav #PART-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    }
+
+    #nav #PART-2 a {
+    left:50%;
+    text-decoration: none;
+    color: #0a0a0a;
+    margin: 20px;
+    font-size: 1.5vw;
+
+
+    }
+
+    #nav #PART-2 a:hover {
+    color: rgb(45, 171, 249)
+    }
+
   </style>
 </head>
 
@@ -129,6 +175,21 @@
         </g>
       </svg>
       <section class="sec1 pin">
+        <div id="nav">
+          <div id="PART-1">
+            <h2>This is Telemed</h2>
+          </div>
+
+
+          <div id="PART-2">
+
+            <a href="/home">Home</a>
+         
+
+          </div>
+
+
+        </div>
         <h1>TELEPHARM</h1>
         <h1>Pharmacy stores at door....</h1>
 

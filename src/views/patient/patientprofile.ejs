@@ -1,18 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js" integrity="sha512-xAxjKW1J/R4TFytv43xvQ7jFTrJlBzsDOH/Aw0fFc2nvarQkE3d08lTicjzUsZJYDoHYDCpwsUUqOJXh34A1sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@200;400;700&display=swap');
+
+
+
+
+    .btn {
+      background-color: #f6b0b0;
+      border: none;
+      color: rgb(255, 250, 250);
+      padding: 16px 32px;
+      text-align: center;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #f35d5d;
+      color: white;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Poppins';
+    }
+
+    .wrapper {
+      overflow-x: hidden;
+      position: relative;
+      width: 120vh;
+      background-color: rgb(244, 244, 189);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    svg {
+      position: absolute;
+      top: 12em;
+      left: 10vw;
+      width: 50vw;
+
+      .mask {
+        width: 0;
+      }
+    }
+
+    .container {
+      display: flex;
+      width: 300vw;
+
+      .col {
+        display: flex;
+        gap: 3em;
+
+        p {
+          font-size: .8rem;
+        }
+      }
+
+      section {
+        width: 100vw;
+        margin-left: 0%;
+        padding: 20vw 10vw;
+
+        h1 {
+          font-size: 3rem;
+          margin: 0;
+        }
+
+        p {
+          font-size: 1.2rem;
+          width: 50vw;
+        }
+
+        ul {
+          list-style-type: none;
+          display: flex;
+          gap: 3em;
+          width: 100%;
+          height: 300px;
+          padding: 0;
+
+          li {
+            background: white;
+            border-radius: .3em;
+            flex-grow: 1;
+          }
+
+        }
+
+      }
+    }
+
+    section {
+      width: auto;
+      height: 100vh;
+
+    }
+    #nav {
+    height: 10vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    margin-left: 0%;
+    display: flex;
+    padding: 0 10px;
+    background-color: #8ebfff;
+    opacity: 1;
+    z-index: 100;
+
+    align-items: center;
+    justify-content: space-between;
+    }
+
+    #nav #PART-1{
+    left:0%;
+    font-size:1.2vw;
+    color: #000000;
+
+
+    }
+
+    #nav #PART-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    }
+
+    #nav #PART-2 a {
+    left:50%;
+    text-decoration: none;
+    color: #0a0a0a;
+    margin: 20px;
+    font-size: 1.5vw;
+
+
+    }
+
+    #nav #PART-2 a:hover {
+    color: rgb(45, 171, 249)
+    }
+    /*****************************
+    * horizontal news ticker
+    ******************************/
+    a {
+
+    text-decoration: none;
+
+    }
+    .ticker-wrapper-h{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid #ef260c;
+    }
+
+    .ticker-wrapper-h .heading{
+    background-color: #ff8604;
+    color: #fff;
+    padding: 20px 30px;
+    flex: 0 0 auto;
+    z-index: 1000;
+    font-size: larger;
+    font-style:italic;
+    text-decoration: double;
+    text-decoration-color: #212529;
+    }
+    
+
+
+    .news-ticker-h{
+    display: flex;
+    margin:0;
+    padding: 0;
+    padding-left: 90%;
+    z-index: 999;
+
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: tic-h;
+    animation-duration: 20s;
+
+    }
+    .news-ticker-h:hover {
+    animation-play-state: paused;
+    }
+
+    .news-ticker-h li{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    white-space: nowrap;
+    padding-left: 80px;
+    }
+
+    .news-ticker-h li a{
+    color: #212529;
+    font-weight: bold;
+    }
+
+    @keyframes tic-h {
+    0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    }
+    100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    }
+    }
+    body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #e2dcdc;
+    z-index: -1;
+    }
+
+    .background {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    }
+
+    h1 {
+    align-self: flex-start;
+    margin-left: 10%;
+    font-size: 4em;
+    color: black;
+    margin-bottom: -20px;
+    font-weight: 900;
+    }
+
+    .news-box {
+    display: flex;
+    background-color: white;
+    width: 80%;
+    min-height: 40%;
+    padding: 20px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .primary-news {
+
+    display: flex;
+    width: 40%;
+    align-items: flex-start; /* Align the children to the top */
+    margin-right: 20px;
+    margin-top: 23px;
+    }
+
+    .primary-news-content {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Title and subtitle at the top */
+    height: 100%; /* Make sure it fills the parent height */
+    }
+
+    .primary-news-title {
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
+    }
+
+    .primary-news-subtitle {
+    font-size: 1em;
+    margin-bottom: auto;
+    }
+
+    .primary-news-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    align-self: start; /* Align the button to the start (left) */
+    margin-top: auto; /* Push the button to the bottom */
+    }
+
+    .primary-news-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align the top of the image with the top of the content */
+    flex-shrink: 0;
+    padding-left: 20px;
+    }
+
+    .primary-news-image {
+    border-radius: 10px;
+    width: 400px;
+    height: 280px;
+    object-fit: cover;
+    }
+    .secondary-news {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-left: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 305px;
+    }
+
+    .see-all-link {
+    align-self: flex-end;
+    margin-bottom: 0px;
+    text-decoration: none;
+    /* Additional styling for the link */
+    }
+
+    .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-gap: 10px;
+    padding: 0px; /* Adds some padding within the container */
+    max-height: 280px; /* Example adjustment: total height - 'See All' link height - padding */
+    overflow-y: auto; /* Allows scrolling within the grid if necessary */
+    }
+
+    .grid-item {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1.5px;
+    align-items: center;
+    /* Ensure the height of each grid-item is consistent to make the layout predictable */
+    }
+
+    .secondary-news-image {
+    border-radius: 10px; /* Match the border radius to your image */
+    width: 120px; /* Adjust width as needed */
+    height: 80px; /* Adjust height as needed */
+    margin-right: 10px;
+    flex-shrink: 0;
+    }
+
+    .text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    height: 100%;
+    }
+
+    .secondary-news-title {
+    font-size: 1em; /* Adjust font size as needed */
+    font-weight: bold; /* Make the title bold */
+    margin: 2px 0 0px 0; /* Adjust spacing as needed */
+    height: 2.8em;
+    overflow: hidden; /* Hide overflow beyond two lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the content to two lines */
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    }
+
+    .secondary-news-subtitle {
+    font-size: 0.8em; /* Adjust font size as needed */
+    color: #707070; /* Adjust subtitle color as needed */
+    margin: 0; /* Adjust spacing as needed */
+    height: 3em; /* Fixed height, assuming two lines max */
+    overflow: hidden; /* Hide overflow beyond two lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the content to two lines */
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    }
+    .sticky-container {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    }
+
+
+
+    @media (max-width: 2000px) {
+    .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Change to 2 columns when the viewport width is 1200px or less */
+    }
+    }
+
+    @media (max-width: 1800px) {
+    .grid-container {
+    grid-template-columns: 1fr; /* Change to 1 column when the viewport width is 800px or less */
+    }
+
+    .primary-news {
+    width: 120%; /* Make the primary news take the full width */
+    }
+
+    .secondary-news {
+    width: 80%; /* Adjust the secondary news width to be full width */
+    }
+    }
+
+    @media (max-width: 1200px) {
+    .news-box {
+    flex-direction: column; /* Stack the primary and secondary news vertically */
+    }
+
+    .primary-news, .secondary-news {
+    width: 100%; /* Make both primary and secondary news take up the full width */
+    }
+
+    .secondary-news {
+    display: none; /* Hide the secondary news, showing only the primary news */
+    }
+    }
+    @media (max-width: 800px) {
+    /* Hide elements not part of the primary news image with title overlay */
+    .secondary-news, .secondary-news-title, .secondary-news-subtitle, .primary-news-subtitle, .primary-news-button, .welcome-statement {
+    display: none;
+    }
+    .news-box {
+    width: auto;
+    }
+
+    /* Adjust the primary news container */
+    .primary-news {
+    width: auto;
+    height: auto;
+    position: relative; /* For positioning the title */
+    margin-right: 0;
+    margin-top: 0;
+    }
+
+    /* Style the title to overlay on the bottom-right of the image */
+    .primary-news-title {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed for spacing from the bottom */
+    left: 20px; /* Adjust as needed for spacing from the right */
+    color: white; /* Assuming a dark image, for contrast */
+    font-size: 1em; /* Adjust based on your preference */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0; /* Reset any margin */
+    }
+
+    /* Ensure the image takes up the full width of its container */
+    .primary-news-image {
+    width: 20rem; /* Adjust image width to fill the container */
+    height: 20rem; /* Adjust height to maintain aspect ratio */
+    object-fit:fill; /* Ensure the image covers the area, might crop, but ensures no stretching */
+    }
+    }
+
+  </style>
 </head>
+
+
+
 <body>
 
 
-<h1>
-    patient profile
-</h1>
-    
-    
+
+  <div class="wrapper">
+
+    <div class="container scrollx">
+      <svg viewBox="0 0 900 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.89998 6C9.43671 8.28224 7.41896 10 5 10C2.23858 10 0 7.76142 0 5C0 2.23858 2.23858 0 5 0C7.41896 0 9.43671 1.71776 9.89998 4H445.1C445.563 1.71776 447.581 0 450 0C452.419 0 454.437 1.71776 454.9 4H890.1C890.563 1.71776 892.581 0 895 0C897.761 0 900 2.23858 900 5C900 7.76142 897.761 10 895 10C892.581 10 890.563 8.28224 890.1 6H454.9C454.437 8.28224 452.419 10 450 10C447.581 10 445.563 8.28224 445.1 6H9.89998Z" fill="#D9D9D9" />
+        <mask id="mask0_0_1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="900" height="10">
+          <path d="M9.89998 6C9.43671 8.28224 7.41896 10 5 10C2.23858 10 0 7.76142 0 5C0 2.23858 2.23858 0 5 0C7.41896 0 9.43671 1.71776 9.89998 4H445.1C445.563 1.71776 447.581 0 450 0C452.419 0 454.437 1.71776 454.9 4H890.1C890.563 1.71776 892.581 0 895 0C897.761 0 900 2.23858 900 5C900 7.76142 897.761 10 895 10C892.581 10 890.563 8.28224 890.1 6H454.9C454.437 8.28224 452.419 10 450 10C447.581 10 445.563 8.28224 445.1 6H9.89998Z" fill="#D9D9D9" />
+        </mask>
+        <g mask="url(#mask0_0_1)">
+          <rect class="mask" y="-49" height="99" fill="black" />
+        </g>
+      </svg>
+      <section class="sec1 pin">
+        <div id="nav">
+          <div id="PART-1">
+            <h2>This is Telemed</h2>
+          </div>
+
+
+          <div id="PART-2">
+
+            <a href="/home">Home</a>
+            <a href="/telepharm">Telepharm</a>
+            <a href="/teleconsult">Teleconsult</a>
+            <a href="/community">Community</a>
+            <a href="/about">About</a>
+
+          </div>
+
+
+        </div>
+        <h1>TELEMED</h1>
+        <h1>No need to lookout..We bring the medical stores at your door step..</h1>
+
+        <div class="col">
+          <p>Lorem ipsum dolor sit amet consectetur. Egestas euismod nec sit sed massa turpis in. Sit praesent arcu leo lectus pellentesque. Ornare elit orci morbi volutpat. Ut fermentum lorem morbi quis risus amet urna. Urna egestas lorem.</p>
+          <p>Lorem ipsum dolor sit amet consectetur. Egestas euismod nec sit sed massa turpis in. Sit praesent arcu leo lectus pellentesque. Ornare elit orci morbi volutpat. Ut fermentum lorem morbi quis risus amet urna. Urna egestas lorem.</p>
+        </div>
+      </section>
+      <section class="sec2 pin">
+
+        <h1 class="anim">APPOINTMENTS!!!</h1>
+        <button type="button" class="btn btn-primary ">View</button>
+
+
+        <div class="col anim">
+          <p>Lorem ipsum dolor sit amet consectetur. Egestas euismod nec sit sed massa turpis in. Sit praesent arcu leo lectus pellentesque. Ornare elit orci morbi volutpat. Ut fermentum lorem morbi quis risus amet urna. Urna egestas lorem.</p>
+          <p>Lorem ipsum dolor sit amet consectetur. Egestas euismod nec sit sed massa turpis in. Sit praesent arcu leo lectus pellentesque. Ornare elit orci morbi volutpat. Ut fermentum lorem morbi quis risus amet urna. Urna egestas lorem.</p>
+        </div>
+      </section>
+      
+    </div>
+  </div>
+
+  <section style="background-color: rgb(226, 240, 245);">
+    <!-- <div class="map">
+
+      <h1>locate the nearest pharmacy store</h1>
+    </div> -->
+<div class="ticker-wrapper-h">
+  <div class="heading">News</div>
+
+  <ul class="news-ticker-h">
+    <li><a href="https://health.economictimes.indiatimes.com/news/diagnostics">Get the latest updates on Diagnostics..CLICK HERE to know more</a></li>
+      <li><a href="https://health.economictimes.indiatimes.com/pharma?utm_source=main_menu2&utm_medium=sectionListing">Get the latest news about Pharmacy ..CLICK HERE to know more</a></li>
+
+        <li><a href="https://health.economictimes.indiatimes.com/events?utm_source=main_menu&utm_medium=homepage">Stay updated about the Events happening around the worls..CLICK HERE to know more</a></li>
+
+  </ul>
+
+</div>
+<body>
+  <div class="background">
+    <h1 class="welcome-statement">Important!!!</h1>
+    <div class="news-box">
+      <div class="primary-news">
+        <div class="primary-news-content">
+          <h2 class="primary-news-title">Important Health Schemes by the government of India you must know..</h2>
+          <p class="primary-news-subtitle">"We have achieved so much this year with your support. Thanks for all you do!"</p>
+          <button class="primary-news-button"><a href="https://www.forbes.com/advisor/in/health-insurance/government-health-insurance-schemes-in-india/" style="color: #fff;">Learn More</a></button>
+        </div>
+        <div class="primary-news-image-container">
+          <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1680885736/Untitled_design_kvyotp.png" alt="News Image" class="primary-news-image">
+        </div>
+      </div>
+      <div class="secondary-news">
+        <div class="sticky-container">
+          <a href="https://www.forbes.com/advisor/in/health-insurance/government-health-insurance-schemes-in-india/" class="see-all-link">See all</a>
+        </div>
+        <div class="grid-container">
+          <!-- Repeat this block for each secondary news item (15 times for a 5x3 grid) -->
+          <div class="grid-item">
+            <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1720546830/aam_aadmi_deqehw.jpg" alt="News Image" class="secondary-news-image">
+            <div class="text-container">
+             <a href="https://www.myscheme.gov.in/hi/schemes/aaby">
+               <h3 class="secondary-news-title">Aam aadmi Bima Yojna</h3>
+             </a>
+              <p class="secondary-news-subtitle">Aam Aadmi Bima Yojana (AABY) Formulated in 2007, the Aam Aadmi Bima Yojana was created to solve the problems of people living in the Indian countryside or ...</p>
+            </div>
+          </div>
+          <!-- ... other grid items ... -->
+          <div class="grid-item">
+            <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1720546898/central_health_kr6cdl.jpg" alt="News Image" class="secondary-news-image">
+            <div class="text-container">
+              <a href="https://cghs.gov.in/CghsGovIn/faces/ViewPage.xhtml">
+                <h3 class="secondary-news-title">Central Health Government Scheme</h3>
+              </a>
+             
+              <p class="secondary-news-subtitle">Mission. Preventive, promotive and curative health and wellness services that are responsive, accountable and cost effective, providing financial risk ...</p>
+            </div>
+          </div>
+          <div class="grid-item">
+            <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1720546985/bhamashah_xfgabs.jpg" alt="News Image" class="secondary-news-image">
+            <div class="text-container">
+              
+              <a href="https://vikaspedia.in/schemesall/state-specific-schemes/schemes-of-rajasthan/bhamashah-swasthya-bima-yojana">
+                <h3 class="secondary-news-title">Bhamashah Swasthya Bima Yojana</h3>
+              </a>
+              <p class="secondary-news-subtitle">Bamashah Health Insurance Scheme has been started on December 13, 2015. Cashless health services are provided to eligible families under the scheme. These services are being provided in government hospitals as well as in private hospitals.</p>
+            </div>
+          </div>
+          <div class="grid-item">
+            <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1720547060/emploe_state_m5jqxf.avif" alt="News Image" class="secondary-news-image">
+            <div class="text-container">
+              <a href="https://www.india.gov.in/spotlight/employees-state-insurance-scheme#tab=tab-1">
+              <h3 class="secondary-news-title">Employees' State Insurance Scheme</h3></a>
+              <p class="secondary-news-subtitle">The Employees' State Insurance Scheme is an integrated measure of Social Insurance embodied in the Employees' State Insurance Act and it is designed to accomplish the task of protecting 'employees' as defined in the Employees' State Insurance Act, 1948 against the impact of incidences of sickness,</p>
+            </div>
+          </div>
+          <div class="grid-item">
+            <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1720547120/mahatma_phule_d8xfoh.webp" alt="News Image" class="secondary-news-image">
+            <div class="text-container">
+              <a href="https://www.jeevandayee.gov.in/">
+              <h3 class="secondary-news-title">Mahatma Jyotirao Phule Jan Arogya Yojana</h3></a>
+              <p class="secondary-news-subtitle">The State Government of Maharashtra launched its flagship health insurance scheme, Rajiv Gandhi Jeevandayee Arogya Yojana (RGJAY) on 2nd July 2012 in 8 districts of Maharashtra (Phase 1) and later on introduced it to remaining 28 districts of Maharashtra (Phase 2). The scheme is renamed as Mahatma Jyotirao Phule Jan Arogya Yojana (MJPJAY) from 1st April 2017.</p>
+            </div>
+          </div>
+          <div class="grid-item">
+            <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1720547206/ayushman_bharat_yb3ypi.jpg" alt="News Image" class="secondary-news-image">
+            <div class="text-container">
+              <a href="https://abdm.gov.in/">
+              <h3 class="secondary-news-title">Ayushman Bharat Digital Mission</h3></a>
+              <p class="secondary-news-subtitle">The Ayushman Bharat Digital Mission (ABDM) aims to develop the backbone necessary to support the integrated digital health infrastructure of the country. It will bridge the existing gap amongst different stakeholders of Healthcare ecosystem through digital highways.</p>
+            </div>
+          </div>
+          <div class="grid-item">
+            <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1720547295/awaz_health_insurance_pzkkbe.jpg" alt="News Image" class="secondary-news-image">
+            <div class="text-container">
+              <a href="https://www.bajajfinserv.in/insurance/awaz-health-insurance-scheme">
+              <h3 class="secondary-news-title">Awaz health insurance scheme</h3></a>
+              <p class="secondary-news-subtitle">This scheme offers health insurance coverage and protection against accidental death, tailored to meet the needs of migrant workers employed ...</p>
+            </div>
+          </div>
+          <div class="grid-item">
+            <img src="https://res.cloudinary.com/dtca2p99y/image/upload/v1720547342/karunya_aarogya_n9pyvy.jpg" alt="News Image" class="secondary-news-image">
+            <div class="text-container">
+              <a href="https://sha.kerala.gov.in/karunya-arogya-suraksha-padhathi/">
+              <h3 class="secondary-news-title">Karunya Arogya Suraksha Padhathi (KASP)</h3></a>
+              <p class="secondary-news-subtitle">KARUNYA AROGYA SURAKSHA PADHATHI (KASP) is the health care scheme which aims at providing a health cover of Rs. 5 lakhs per family per year for secondary and tertiary care hospitalization to over 42 Lakhs poor and vulnerable families (approximately 64 lakhs beneficiaries) that form the bottom 40% of the Kerala population”. State of Kerala decided to converge all the</p>
+            </div>
+          </div>
+          
+         
+        
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
 </body>
+
+  </section>
+
+
+
+
+
+  <script>
+    const container = document.querySelector(".container");
+    const sections = gsap.utils.toArray(".container section");
+    const texts = gsap.utils.toArray(".anim");
+    const mask = document.querySelector(".mask");
+
+    let scrollTween = gsap.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".container",
+        pin: true,
+        scrub: 1,
+        end: "+=3000",
+        //snap: 1 / (sections.length - 1),
+        markers: false,
+      }
+    });
+
+    console.log(1 / (sections.length - 1))
+
+    //Progress bar animation
+
+    gsap.to(mask, {
+      width: "100%",
+      scrollTrigger: {
+        trigger: ".wrapper",
+        start: "top left",
+        scrub: 1
+      }
+    });
+
+    // whizz around the sections
+    sections.forEach((section) => {
+      // grab the scoped text
+      let text = section.querySelectorAll(".anim");
+
+      // bump out if there's no items to animate
+      if (text.length === 0) return
+
+      // do a little stagger
+      gsap.from(text, {
+        y: -130,
+        opacity: 0,
+        duration: 2,
+        ease: "elastic",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: section,
+          containerAnimation: scrollTween,
+          start: "left center",
+          markers: false
+        }
+      });
+    });
+  </script>
+</body>
+
+
+
+
 </html>

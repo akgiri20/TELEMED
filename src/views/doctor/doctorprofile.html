@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor profile</title>
+  <link rel="stylesheet" href="doctorprofile.css">
+  <script>
+    var messageBox = document.querySelector('.js-message');
+      var btn = document.querySelector('.js-message-btn');
+      var card = document.querySelector('.js-profile-card');
+      var closeBtn = document.querySelectorAll('.js-message-close');
+
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.add('active');
+      });
+
+      closeBtn.forEach(function (element, index) {
+        console.log(element);
+        element.addEventListener('click', function (e) {
+          e.preventDefault();
+          card.classList.remove('active');
+        });
+      });
+  </script>
+</head>
+<body>
+ 
+
+
+  <div class="wrapper">
+    <div class="profile-card js-profile-card">
+      <div class="profile-card__img">
+        <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg"
+          alt="profile card">
+      </div>
+  
+      <div class="profile-card__cnt js-profile-cnt">
+        <div class="profile-card__name"></div>
+
+        <div class="profile-card__txt">
+          <div class="profile-card-social">
+          
+            <div class="container">
+          
+                
+          
+                <div class="products-container">
+          
+                  <div class="product" data-name="p-1">
+                    <!-- <img src="src\views\disease\images\1.png" alt=""> -->
+                    <h3>
+                      <%=currentUser.username%>
+                    </h3>
+                    <h3>
+                      <%= currentUser.specialization %>
+                    </h3>
+                    <h3>
+                      <%= currentUser.educationlevel %>
+                    </h3>
+                    <h3>
+                      <%= currentUser.phone %>
+                    </h3>
+          
+          
+                  </div>
+          
+                </div>
+            </div>
+        </div>
+       
+<!-- 
+          <a href="https://www.facebook.com/iaMuhammedErdem" class="profile-card-social__item facebook" target="_blank">
+            <span class="icon-font">
+              <svg class="icon">
+                <use xlink:href="#icon-facebook"></use>
+              </svg>
+            </span>
+          </a>
+  
+          <a href="https://twitter.com/iaMuhammedErdem" class="profile-card-social__item twitter" target="_blank">
+            <span class="icon-font">
+              <svg class="icon">
+                <use xlink:href="#icon-twitter"></use>
+              </svg>
+            </span>
+          </a>
+  
+          <a href="https://www.instagram.com/iamuhammederdem" class="profile-card-social__item instagram" target="_blank">
+            <span class="icon-font">
+              <svg class="icon">
+                <use xlink:href="#icon-instagram"></use>
+              </svg>
+            </span>
+          </a>
+  
+          <a href="https://www.behance.net/iaMuhammedErdem" class="profile-card-social__item behance" target="_blank">
+            <span class="icon-font">
+              <svg class="icon">
+                <use xlink:href="#icon-behance"></use>
+              </svg>
+            </span>
+          </a>
+  
+          <a href="https://github.com/muhammederdem" class="profile-card-social__item github" target="_blank">
+            <span class="icon-font">
+              <svg class="icon">
+                <use xlink:href="#icon-github"></use>
+              </svg>
+            </span>
+          </a>
+  
+          <a href="https://codepen.io/JavaScriptJunkie" class="profile-card-social__item codepen" target="_blank">
+            <span class="icon-font">
+              <svg class="icon">
+                <use xlink:href="#icon-codepen"></use>
+              </svg>
+            </span>
+          </a>
+  
+          <a href="http://muhammederdem.com.tr/" class="profile-card-social__item link" target="_blank">
+            <span class="icon-font">
+              <svg class="icon">
+                <use xlink:href="#icon-link"></use>
+              </svg>
+            </span>
+          </a>
+   -->
+        </div>
+  
+        <div class="profile-card-ctr">
+          <button class="profile-card__button button--blue js-message-btn">Appointment</button>
+          <!-- <button class="profile-card__button button--orange">Follow</button> -->
+        </div>
+      </div>
+  
+      <div class="profile-card-message js-message">
+        <form class="profile-card-form">
+          <div class="profile-card-form__container">
+            <textarea placeholder="Say something..."></textarea>
+          </div>
+  
+          
+        </form>
+  
+        <div class="profile-card__overlay js-message-close"></div>
+      </div>
+  
+   
+  
+  </div>
+  
+  
+
+  
+</body>
+</html>
+

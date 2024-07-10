@@ -5,6 +5,14 @@
     <i style="--clr:#fffd44;"></i>
     <div class="login">
       <h2> Sign In</h2>
+      <div id="nav">
+        <div id="PART-1">
+          <h2>TELEMED</h2>
+        </div>
+        <div id="PART-2">
+          <a href="/home">Home</a>
+        </div>
+      </div>
       <form action="/medicalstorelogin" method="POST">
 
         <div class="inputBx">
@@ -27,7 +35,28 @@
 </body>
 <style>
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+#navhead {
+font-size: 0.7vw;
+color: antiquewhite;
+}
 
+
+#nav {
+height: 90px;
+width: 100%;
+position: fixed;
+top: 0;
+display: flex;
+padding: 0 20px;
+background-color:transparent;
+opacity: 1;
+z-index: 1000;
+color: #fff;
+font-weight: 5px;
+
+align-items: center;
+justify-content: space-between;
+}
   * {
     margin: 0;
     padding: 0;

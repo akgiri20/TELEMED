@@ -3,6 +3,7 @@ const router = express.Router();
 //const passport = require('passport');
 const Specialist = require("../models/Specialist");
 const flash = require("connect-flash");
+const { isLoggedIn} = require("../middleware");
 
 router.get("/", async (req, res) => {
   const specialists = await Specialist.find({});

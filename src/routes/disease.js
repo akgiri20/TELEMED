@@ -3,6 +3,7 @@ const router = express.Router();
 //const passport = require('passport');
 const Disease = require("../models/disease");
 const Medicine = require("../models/medicine");
+const { isLoggedIn} = require("../middleware");
 
 const flash = require("connect-flash");
 

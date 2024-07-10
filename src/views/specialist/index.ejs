@@ -49,106 +49,124 @@
 
 
 <style>
-   /* Card container style */
-   body{
+  /* Card container style */
+  body {
     background-color: #d6daa1;
-   }
-   .card {
-    background-color: #add8e6; /* blue */
-   border-radius: 15px;
-   box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.1);
-   margin-bottom: 80px;
-   opacity: 0; /* Initially hidden */
-   height: 500px; /* Set desired height */
-   display: flex; /* Use flexbox for vertical alignment */
-   flex-direction: column; /* Stack children vertically */
-   justify-content: center; /* Center content vertically */
-   }
+  }
 
-   /* Card animation */
-   @keyframes slideInLeft {
-   0% {
-   transform: translateX(-150%);
-   opacity: 0;
-   }
-   100% {
-   transform: translateX(0);
-   opacity: 1;
-   }
-   }
+  .card {
+    background-color: #add8e6;
+    /* blue */
+    border-radius: 15px;
+    box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 80px;
+    opacity: 0;
+    /* Initially hidden */
+    height: 500px;
+    /* Set desired height */
+    display: flex;
+    /* Use flexbox for vertical alignment */
+    flex-direction: column;
+    /* Stack children vertically */
+    justify-content: center;
+    /* Center content vertically */
+  }
 
-   @keyframes slideInRight {
-   50% {
-   transform: translateX(150%);
-   opacity: 0;
-   }
-   100% {
-   transform: translateX(0);
-   opacity: 1;
-   }
-   }
+  /* Card animation */
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-150%);
+      opacity: 0;
+    }
 
-   /* Apply animation to each card */
-   .card:nth-child(odd) {
-   animation: slideInLeft 2s ease forwards;
-   }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
-   .card:nth-child(even) {
-   animation: slideInRight 2s ease forwards;
-   }
+  @keyframes slideInRight {
+    50% {
+      transform: translateX(150%);
+      opacity: 0;
+    }
 
-   /* Card image style */
-   .card img {
-   border-top-left-radius: 15px;
-   border-top-right-radius: 15px;
-   object-fit: cover;
-   height: 250px; /* Adjust image height */
-   }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
-   /* Card body style */
-   .card-body {
-   padding: 20px;
-   text-align: center; /* Center text */
+  /* Apply animation to each card */
+  .card:nth-child(odd) {
+    animation: slideInLeft 2s ease forwards;
+  }
+
+  .card:nth-child(even) {
+    animation: slideInRight 2s ease forwards;
+  }
+
+  /* Card image style */
+  .card img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    object-fit: cover;
+    height: 250px;
+    /* Adjust image height */
+  }
+
+  /* Card body style */
+  .card-body {
+    padding: 20px;
+    text-align: center;
+    /* Center text */
     text-transform: uppercase;
-   }
+  }
 
-   /* Card title style */
-   .card-body h5 {
-   margin-bottom: 15px;
-   color: #004080; /* Dark blue */
-   font-weight: bold;
-   font-size: 30px; /* Increase font size */
+  /* Card title style */
+  .card-body h5 {
+    margin-bottom: 15px;
+    color: #004080;
+    /* Dark blue */
+    font-weight: bold;
+    font-size: 30px;
+    /* Increase font size */
     text-transform: uppercase;
-   }
+  }
 
-   /* Card text style */
-   .card-body p {
-   color: #333; /* Dark gray */
-   font-size: 18px; /* Increase font size */
+  /* Card text style */
+  .card-body p {
+    color: #333;
+    /* Dark gray */
+    font-size: 18px;
+    /* Increase font size */
     text-transform: uppercase;
-   }
+  }
 
-   /* Button style */
-   .card-body .btn-primary {
-   border-radius: 5px;
-   background-color: #004080; /* Dark blue */
-   border: none;
-   transition: background-color 2s ease;
-   font-size: 15px; /* Increase font size */
+  /* Button style */
+  .card-body .btn-primary {
+    border-radius: 5px;
+    background-color: #004080;
+    /* Dark blue */
+    border: none;
+    transition: background-color 2s ease;
+    font-size: 15px;
+    /* Increase font size */
     /* text-transform: uppercase; */
-   }
+  }
 
-   /* Hover effect for button */
-   .card-body .btn-primary:hover {
-   background-color: #00264d; /* Darker blue */
-   }
+  /* Hover effect for button */
+  .card-body .btn-primary:hover {
+    background-color: #00264d;
+    /* Darker blue */
+  }
 
-   /* Margin adjustment */
-   .wrapper {
-   margin-left: auto;
-   margin-right: auto;
-   max-width: 900px;
-   }
-
+  /* Margin adjustment */
+  .wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+  }
 </style>
+
 </html>

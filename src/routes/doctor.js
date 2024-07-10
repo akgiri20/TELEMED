@@ -2,12 +2,19 @@ const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
 const Doctor = require("../models/doctor");
+const PatientAppointment = require("../models/patientAppointment");
 const Specialist = require("../models/Specialist");
 const flash = require("connect-flash");
 const passport = require("passport");
+const mongoose = require("mongoose");
+const { isLoggedIn } = require("../middleware");
 
 router.get("/doctorregister", async (req, res) => {
   res.render("doctor/register");
+});
+
+router.get("/doctor_menu", async (req, res) => {
+  res.render("doctor/menu");
 });
 
 router.post(
@@ -28,7 +35,8 @@ router.post(
         if (err) return next(err);
         req.flash("success", "MESS!!");
         console.log(req.body);
-        res.redirect("/home");
+        res.redirect('home');
+        //res.redirect('/');
       });
 
       try {
@@ -72,37 +80,68 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", "welcome back!! you are successfully logged in");
-    const redirectUrl = req.session.returnTo || "doctorprofile";
+    const redirectUrl = req.session.returnTo || "/doctorprofile";
     delete req.session.returnTo;
     res.redirect(redirectUrl);
+    
   }
 );
-
-router.get('/doctorprofile',(req,res)=>{
-  res.render('doctor/doctorprofile');
-})
-// router.get("/doctorprofile", async (req, res) => {
-//   res.render("doctor/profile");
-// });
-
-// router.post(
-//   "/doctorprofile",
-//   passport.authenticate("Doctor", {
-//     failureFlash: true,
-//     failureRedirect: "/doctorprofile",
-//   }),
-//   (req, res) => {
-//     req.flash("success", "welcome back!! profile displayed");
-//     const redirectUrl = req.session.returnTo || "/home";
-//     delete req.session.returnTo;
-//     res.redirect(redirectUrl);
-//   }
-// );
 
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success", "Goodbye!");
   res.redirect("/home");
 });
+
+router.get("/appointment/:id", async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).send("Invalid ObjectId");
+  }
+
+  //   const doctorId = mongoose.Types.ObjectId(id);
+
+  // Render the appointment creation page with the doctor ID as a parameter
+  res.render("users/appointmentForm", { doctorId: id });
+});
+
+router.post("/appointment/:id", async (req, res) => {
+  try {
+    const { age, name, address, phone, issue } = req.body;
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).send("Invalid ObjectId");
+    }
+
+    // Create a new appointment object
+    const appointment = new PatientAppointment({
+      age,
+      name,
+      address,
+      phone,
+      issue,
+      doctorID: id,
+    });
+    await appointment.save();
+    req.flash("success", "Successfully made a new appointment!");
+    res.redirect("/appointment");
+  } catch (e) {
+    req.flash("error", e.message);
+    res.redirect("/appointment/:id");
+  }
+});
+
+router.get('/doctorprofile',async(req,res)=>{
+  if(req.isAuthenticated())
+  {
+    console.log('is logged in!!!');
+  }
+  else
+  {
+    console.log('Error!not logged in');
+  };
+  res.render('doctor/doctorprofile');
+})
 
 module.exports = router;

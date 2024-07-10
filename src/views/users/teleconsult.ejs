@@ -5,15 +5,38 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gravity Coding</title>
-  <link rel="stylesheet" href="style.css">
+  <title>TELECONSULT</title>
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js" integrity="sha512-xAxjKW1J/R4TFytv43xvQ7jFTrJlBzsDOH/Aw0fFc2nvarQkE3d08lTicjzUsZJYDoHYDCpwsUUqOJXh34A1sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://kit.fontawesome.com/0d76d3561b.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
   <!-- <div class="main-p"></div> -->
+
+  <div class="main-p ">
+    <div id="nav">
+      <div id="PART-1">
+        <h2>This is Teleconsult</h2>
+      </div>
+      <div id="PART-2">
+        <a href="/patientprofile">Back</a>
+      </div>
+    </div>
+
+    <img id="img1" class="responsive" src="https://res.cloudinary.com/dtca2p99y/image/upload/v1708884606/TELEMED/HOME/TELEconsult_hqwic6.png" alt="">
+
+  </div>
+
   <div id="main">
     <div id="top" >
-      <h1 id="top-h1" > TELE</h1>
+      <!-- <h1 id="top-h1" > TELE</h1> -->
     </div>
 
     <div id="center">
@@ -32,7 +55,7 @@
       </div>
     </div>
     <div id="bottom" >
-      <h1 id="bottom-h1"> CONSULT</h1>
+      <!-- <h1 id="bottom-h1"> CONSULT</h1> -->
     </div>
   </div>
 
@@ -78,6 +101,74 @@
 
 <style>
  
+  .img1 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0%;
+  top: 25%;
+  }
+
+  .responsive {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  }
+
+  #navhead {
+  font-size: 0.7vw;
+  color: antiquewhite;
+  }
+
+
+  #nav {
+  height: 90px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  padding: 0 20px;
+  background-color: #000200;
+  opacity: 1;
+  z-index: 1000;
+
+  align-items: center;
+  justify-content: space-between;
+  }
+
+  #nav #PART-1 {
+  left: 0%;
+  font-size: 1.2vw;
+  color: #fffafa;
+
+
+
+  }
+
+  #nav #PART-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  }
+
+  #nav #PART-2 a {
+  left: 50%;
+  text-decoration: none;
+  color: #fffafa;
+  margin: 20px;
+  font-size: 1.5vw;
+
+
+
+  }
+
+  #nav #PART-2 a:hover {
+  color: rgb(45, 171, 249)
+  }
+
 
   @font-face {
     font-family: Founder;
@@ -104,6 +195,8 @@
   html,
   body {
     width: 100%;
+     font-family: "Bowlby One SC", sans-serif;
+      letter-spacing: 2px;
     
   }
 
