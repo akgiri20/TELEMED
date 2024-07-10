@@ -3,26 +3,55 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RuralHealthcare</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
-<style>
-  .wrapper {
-    /* margin-left:75%; */
-    margin-top: 1%;
-  }
 
-  #Allspecialists {
-    margin-top: 0%;
-    margin-left: 20%;
-    margin-right: 20%;
-  }
-</style>
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- custom js file link 
+   <script src="js/script.js" defer></script> -->
+  <script>
+    let preveiwContainer = document.querySelector('.products-preview');
+    let previewBox = preveiwContainer.querySelectorAll('.preview');
+
+    document.querySelectorAll('.products-container .product').forEach(product => {
+      product.onclick = () => {
+        preveiwContainer.style.display = 'flex';
+        let name = product.getAttribute('data-name');
+        previewBox.forEach(preview => {
+          let target = preview.getAttribute('data-target');
+          if (name == target) {
+            preview.classList.add('active');
+          }
+        });
+      };
+    });
+
+    previewBox.forEach(close => {
+      close.querySelector('.fa-times').onclick = () => {
+        close.classList.remove('active');
+        preveiwContainer.style.display = 'none';
+      };
+    });
+  </script>
+
+
+
 
 <body>
 
-  <h1>Medicines</h1>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RuralHealthcare</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+
+
   <div id="Allspecialists">
     <% for (let med of medicines) { %>
     <div class="card">
@@ -32,14 +61,17 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5><strong><%= med.name %></strong></h5>
+            <h5><strong>
+                <%= med.name %>
+              </strong></h5>
 
-            <h6> for: <%= med.fordisease %> </h6>
-           
+            <h6> for: <%= med.fordisease %>
+            </h6>
 
 
 
-<a class="btn btn-primary" href="/buy">Purchase</a>
+
+            <a class="btn btn-primary" href="/buy">Purchase</a>
           </div>
         </div>
       </div>
@@ -48,129 +80,390 @@
     <% } %>
   </div>
 </body>
+</head>
 
+<div class="container">
 
-<style>
-  /* Card container style */
-  body {
-    background-color: #add8e6;
-    /* Light blue background */
-  }
+  <h3 class="title"> Available Medicines </h3>
 
-  .card {
-    background-color: #db84bb;
-    /* Baby pink background */
-    /* White */
-    border-radius: 15px;
-    box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.1);
-    margin-bottom: 80px;
-    opacity: 0;
-    /* Initially hidden */
-    height: 200px;
-    /* Set desired height */
-    display: flex;
-    /* Use flexbox for vertical alignment */
-    flex-direction: column;
-    /* Stack children vertically */
-    justify-content: center;
-    /* Center content vertically */
-  }
+  <div class="products-container">
 
-  /* Card animation */
-  @keyframes slideInLeft {
-    0% {
-      transform: translateX(-150%);
-      opacity: 0;
-    }
+    <div class="product" data-name="p-1">
+      <img src="src\views\disease\images\1.png" alt="">
+      <h3>Cipla</h3>
+      <div class="price">$2.00</div>
+    </div>
 
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
+    <div class="product" data-name="p-2">
+      <img src="src\views\disease\images\2.png" alt="">
+      <h3>Cetrizine</h3>
+      <div class="price">$2.00</div>
+    </div>
 
-  @keyframes slideInRight {
-    50% {
-      transform: translateX(150%);
-      opacity: 0;
-    }
+    <div class="product" data-name="p-3">
+      <img src="src\views\disease\images/3.png" alt="">
+      <h3>Paracetamol</h3>
+      <div class="price">$2.00</div>
+    </div>
 
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
+    <div class="product" data-name="p-4">
+      <img src="src\views\disease\images\4.png" alt="">
+      <h3>Dolo-650</h3>
+      <div class="price">$2.00</div>
+    </div>
 
-  /* Apply animation to each card */
-  .card:nth-child(odd) {
-    animation: slideInLeft 2s ease forwards;
-  }
+    <div class="product" data-name="p-5">
+      <img src="src\views\disease\images\5.png" alt="">
+      <h3>Crocine</h3>
+      <div class="price">$2.00</div>
+    </div>
 
-  .card:nth-child(even) {
-    animation: slideInRight 2s ease forwards;
-  }
+    <div class="product" data-name="p-6">
+      <img src="src\views\disease\images\6.png" alt="">
+      <h3>ASOZEN FORTE</h3>
+      <div class="price">$2.00</div>
+    </div>
 
-  /* Card image style */
-  .card img {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    object-fit: cover;
-    height: 250px;
-    /* Adjust image height */
-  }
+  </div>
 
-  /* Card body style */
-  .card-body {
-    padding: 20px;
-    text-align: center;
-    /* Center text */
-    text-transform: uppercase;
-  }
+</div>
 
-  /* Card title style */
-  .card-body h5 {
-    margin-bottom: 15px;
-    color: #004080;
-    /* Dark blue */
-    font-weight: bold;
-    font-size: 30px;
-    /* Increase font size */
-    text-transform: uppercase;
-  }
+<div class="products-preview">
 
-  /* Card text style */
-  .card-body p {
-    color: #333;
-    /* Dark gray */
-    font-size: 18px;
-    /* Increase font size */
-    text-transform: uppercase;
-  }
+  <div class="preview" data-target="p-1">
+    <i class="fas fa-times"></i>
+    <img src="src\views\disease\images\1.png" alt="">
+    <h3>organic strawberries</h3>
+    <div class="stars">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <span>( 250 )</span>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, dolorem.</p>
+    <div class="price">$2.00</div>
+    <div class="buttons">
+      <a href="#" class="buy">buy now</a>
+      <a href="#" class="cart">add to cart</a>
+    </div>
+  </div>
 
-  /* Button style */
-  .card-body .btn-primary {
-    border-radius: 5px;
-    background-color: #004080;
-    /* Dark blue */
-    border: none;
-    transition: background-color 2s ease;
-    font-size: 15px;
-    /* Increase font size */
-    /* text-transform: uppercase; */
-  }
+  <div class="preview" data-target="p-2">
+    <i class="fas fa-times"></i>
+    <img src="src\views\disease\images\2.png" alt="">
+    <h3>organic onions</h3>
+    <div class="stars">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <span>( 250 )</span>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, dolorem.</p>
+    <div class="price">$2.00</div>
+    <div class="buttons">
+      <a href="#" class="buy">buy now</a>
+      <a href="#" class="cart">add to cart</a>
+    </div>
+  </div>
 
-  /* Hover effect for button */
-  .card-body .btn-primary:hover {
-    background-color: #00264d;
-    /* Darker blue */
-  }
+  <div class="preview" data-target="p-3">
+    <i class="fas fa-times"></i>
+    <img src="src\views\disease\images/3.png" alt="">
+    <h3>organic tomatoes</h3>
+    <div class="stars">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <span>( 250 )</span>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, dolorem.</p>
+    <div class="price">$2.00</div>
+    <div class="buttons">
+      <a href="#" class="buy">buy now</a>
+      <a href="#" class="cart">add to cart</a>
+    </div>
+  </div>
 
-  /* Margin adjustment */
-  .wrapper {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 900px;
-  }
-</style>
+  <div class="preview" data-target="p-4">
+    <i class="fas fa-times"></i>
+    <img src="src\views\disease\images\4.png" alt="">
+    <h3>organic brinjal</h3>
+    <div class="stars">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <span>( 250 )</span>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, dolorem.</p>
+    <div class="price">$2.00</div>
+    <div class="buttons">
+      <a href="#" class="buy">buy now</a>
+      <a href="#" class="cart">add to cart</a>
+    </div>
+  </div>
+
+  <div class="preview" data-target="p-5">
+    <i class="fas fa-times"></i>
+    <img src="src\views\disease\images\5.png" alt="">
+    <h3>organic broccoli</h3>
+    <div class="stars">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <span>( 250 )</span>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, dolorem.</p>
+    <div class="price">$2.00</div>
+    <div class="buttons">
+      <a href="#" class="buy">buy now</a>
+      <a href="#" class="cart">add to cart</a>
+    </div>
+  </div>
+
+  <div class="preview" data-target="p-6">
+    <i class="fas fa-times"></i>
+    <img src="src\views\disease\images\6.png" alt="">
+    <h3>organic potatoes</h3>
+    <div class="stars">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <span>( 250 )</span>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, dolorem.</p>
+    <div class="price">$2.00</div>
+    <div class="buttons">
+      <a href="#" class="buy">buy now</a>
+      <a href="#" class="cart">add to cart</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
 
 </html>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600&display=swap');
+
+  * {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all .2s linear;
+    text-transform: capitalize;
+  }
+
+  html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: #eee;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .container .title {
+    font-size: 3.5rem;
+    color: #444;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .container .products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2rem;
+  }
+
+  .container .products-container .product {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #fff;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    outline: .1rem solid #ccc;
+    outline-offset: -1.5rem;
+    cursor: pointer;
+  }
+
+  .container .products-container .product:hover {
+    outline: .2rem solid #222;
+    outline-offset: 0;
+  }
+
+  .container .products-container .product img {
+    height: 25rem;
+  }
+
+  .container .products-container .product:hover img {
+    transform: scale(.9);
+  }
+
+  .container .products-container .product h3 {
+    padding: .5rem 0;
+    font-size: 2rem;
+    color: #444;
+  }
+
+  .container .products-container .product:hover h3 {
+    color: #27ae60;
+  }
+
+  .container .products-container .product .price {
+    font-size: 2rem;
+    color: #444;
+  }
+
+  .products-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, .8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .products-preview .preview {
+    display: none;
+    padding: 2rem;
+    text-align: center;
+    background: #fff;
+    position: relative;
+    margin: 2rem;
+    width: 40rem;
+  }
+
+  .products-preview .preview.active {
+    display: inline-block;
+  }
+
+  .products-preview .preview img {
+    height: 30rem;
+  }
+
+  .products-preview .preview .fa-times {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    cursor: pointer;
+    color: #444;
+    font-size: 4rem;
+  }
+
+  .products-preview .preview .fa-times:hover {
+    transform: rotate(90deg);
+  }
+
+  .products-preview .preview h3 {
+    color: #444;
+    padding: .5rem 0;
+    font-size: 2.5rem;
+  }
+
+  .products-preview .preview .stars {
+    padding: 1rem 0;
+    font-size: 1.7rem;
+  }
+
+  .products-preview .preview .stars i {
+    color: #27ae60;
+  }
+
+  .products-preview .preview .stars span {
+    color: #999;
+  }
+
+  .products-preview .preview p {
+    line-height: 1.5;
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    color: #777;
+  }
+
+  .products-preview .preview .price {
+    padding: 1rem 0;
+    font-size: 2.5rem;
+    color: #27ae60;
+  }
+
+  .products-preview .preview .buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .products-preview .preview .buttons a {
+    flex: 1 1 16rem;
+    padding: 1rem;
+    font-size: 1.8rem;
+    color: #444;
+    border: .1rem solid #444;
+  }
+
+  .products-preview .preview .buttons a.cart {
+    background: #444;
+    color: #fff;
+  }
+
+  .products-preview .preview .buttons a.cart:hover {
+    background: #111;
+  }
+
+  .products-preview .preview .buttons a.buy:hover {
+    background: #444;
+    color: #fff;
+  }
+
+
+  @media (max-width:991px) {
+
+    html {
+      font-size: 55%;
+    }
+
+  }
+
+  @media (max-width:768px) {
+
+    .products-preview .preview img {
+      height: 25rem;
+    }
+
+  }
+
+  @media (max-width:450px) {
+
+    html {
+      font-size: 50%;
+    }
+
+  }
+</style>
