@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/nearby.css">
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+  <title>Locate</title>
+</head>
+
+<body>
+  <main>
+    <section class="map">
+
+
+      <div class="map__container container">
+        <h2 class="map__title">Your nearest Medical shops are: </h2>
+        <div class="map" id="map" style="height: 70%; width: 80%; align-self: center;">
+          <!-- MAP EMBED HERE -->
+          <p>MAP goes here ! </p>
+          <div id='map' style='width: 400px; height: 300px;'></div>
+        </div>
+      </div>
+
+      <div class="table__container container">
+        <table class="table">
+          <tr bgcolor="lightgrey">
+            <th>Medical store</th>
+            <th>Time</th>
+            <th>Phone</th>
+            <th>Addresss</th>
+          </tr>
+          <% for (let i = 0 ; i < nearPlant.length ; i++)  { %>
+          <tr class="datarow">
+            <td><a href="/disease"><%= nearPlant[i].username %></a></td>
+            <td><%= nearPlant[i].time%></td>
+            <td><%= nearPlant[i].phone %></td>
+            <td><%= nearPlant[i].address %></td>
+          </tr>
+          <% } %>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+</body>
+
+</html>
+
+<script>
+  let lon = '<%- lon %>'
+  let lat = '<%- lat %>'
+
+  const longitude =
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGl0YW5pdW01OTYiLCJhIjoiY2w2bmIwNWxwMHRqOTNqbzcxNWxzN240ZCJ9.zpgHYiL8reD3OPg-t1_TuQ';
+  const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: [lon, lat], // starting center in [lng, lat]
+    zoom: 10 // starting zoom
+  });
+
+  let nearPlantCoord = <%- coordinateData %>;
+  let nearPlantName = <%- nearPlantName %>;
+
+
+  for (let i = 0; i < nearPlantCoord.length; i++) {
+    new mapboxgl.Marker()
+      .setLngLat([nearPlantCoord[i][0], nearPlantCoord[i][1]])
+      .setPopup(
+        new mapboxgl.Popup({
+          offset: 25
+        })
+        .setHTML(
+          `<h3>${nearPlantName[i]}</h3>`
+        )
+      )
+      .addTo(map)
+  }
+</script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+
+</html>
